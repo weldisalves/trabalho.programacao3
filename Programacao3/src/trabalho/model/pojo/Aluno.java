@@ -24,7 +24,7 @@ public class Aluno {
 		return this.cpf;
 	}
 
-	
+	// ainda temos que ver como sobreescrever este método
 	@Override
     public boolean equals(Object obj) {
 		if(obj == null) return false;	
