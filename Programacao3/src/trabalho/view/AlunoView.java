@@ -11,7 +11,7 @@ public class AlunoView {
 	
 	private static Scanner ler = new Scanner(System.in);
 	private static Aluno newAluno;
-	private static AlunoDAO alunos;
+	private AlunoDAO alunos;
 	
 	public AlunoView(){
 		this.alunos = new AlunoDAO();
@@ -24,7 +24,7 @@ public class AlunoView {
 		
 		System.out.println("\n nome: ");
 		String nome = ler.nextLine();
-		System.out.println("\n CPF: ");
+		System.out.println("\n CPF: ");		
 		String cpf = ler.nextLine();		
 		
 		newAluno = new Aluno(nome,cpf);
@@ -51,8 +51,7 @@ public class AlunoView {
 		newAluno = new Aluno(cpf);
 		
 		System.out.println(this.alunos.buscar(newAluno));
-		
-		
+				
 	}
 	
 

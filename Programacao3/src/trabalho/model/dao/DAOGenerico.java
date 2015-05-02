@@ -10,8 +10,9 @@ import java.util.List;
  * @param <ID> - Um id de tipo genérico.
  */
 public interface DAOGenerico<T> {
-    void salvar(T objeto);
+	void salvar(T objeto);
     void remover(T objeto);
     List<T> listar();
     T buscar(T objeto);
+    
 }

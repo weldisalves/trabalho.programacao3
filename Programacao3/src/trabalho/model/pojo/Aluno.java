@@ -1,4 +1,4 @@
-package trabalho.model.pojo;
+﻿package trabalho.model.pojo;
 
 public class Aluno {
 	
@@ -28,7 +28,7 @@ public class Aluno {
 	@Override
     public boolean equals(Object obj) {
 		if(obj == null) return false;	
-		if(this == obj ){ 
+		if(this.cpf == ((Aluno) obj).getCpf() ){ 
 			return true;
 			}
 		
