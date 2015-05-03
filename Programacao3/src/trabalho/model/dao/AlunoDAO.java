@@ -34,7 +34,7 @@ public class AlunoDAO implements DAOGenerico<Aluno> {
 	@Override
 	public Aluno buscar(Aluno objeto) {
 		
-		return listaAluno.get(listaAluno.indexOf(objeto)+1);
+		return listaAluno.get(listaAluno.indexOf(objeto));
 	}
 
 

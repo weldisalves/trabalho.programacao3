@@ -6,6 +6,7 @@ public class MenuPrincipal {
 		AlunoView alunoView = new AlunoView();
 		
 		alunoView.cadastrar();
+		alunoView.cadastrar();
 		alunoView.listarAluno();
 		alunoView.pesquisarAluno();
 	}
