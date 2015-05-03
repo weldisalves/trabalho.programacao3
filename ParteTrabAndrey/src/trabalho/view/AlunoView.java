@@ -11,7 +11,7 @@ public class AlunoView {
 	
 	private static Scanner ler = new Scanner(System.in);
 	private static Aluno newAluno;
-	private static AlunoDAO alunos;
+	private AlunoDAO alunos;
 	
 	public AlunoView(){
 		this.alunos = new AlunoDAO();
