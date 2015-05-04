@@ -55,5 +55,18 @@ public class AlunoView {
 		
 	}
 	
+	public void removerAluno(){
+		System.out.println("\nALUNO QUE DESEJA REMOVER");
+		System.out.println("\n Digite o cpf:");
+		String cpf = ler.nextLine();
+		
+		newAluno = new Aluno(cpf);
+		this.alunos.buscar(newAluno);
+		this.alunos.remover(newAluno);
+		System.out.println("Apagado com seguranca");
+		
+		
+	}
+	
 
 }

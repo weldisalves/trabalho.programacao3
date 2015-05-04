@@ -59,6 +59,18 @@ public class TurmaView {
 			
 			
 		}
+		public void removerTurma(){
+			System.out.println("\nTURMA QUE DESEJA REMOVER");
+			System.out.println("\n Digite o ano:");
+			String ano = ler.nextLine();
+			
+			newTurma = new Turma(ano);
+			this.turmas.buscar(newTurma);
+			this.turmas.remover(newTurma);
+			System.out.println("Apagado com seguranca");
+			
+			
+		}
 		
 
 }

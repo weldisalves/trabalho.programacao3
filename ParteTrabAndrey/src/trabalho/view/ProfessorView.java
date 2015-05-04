@@ -54,6 +54,18 @@ public class ProfessorView {
 		
 		
 	}
+	public void removerProfessor(){
+		System.out.println("\nPROFESSOR QUE DESEJA REMOVER");
+		System.out.println("\n Digite o cpf:");
+		String cpf = ler.nextLine();
+		
+		newProfessor = new Professor(cpf);
+		this.professores.buscar(newProfessor);
+		this.professores.remover(newProfessor);
+		System.out.println("Apagado com seguranca");
+		
+		
+	}
 	
 
 

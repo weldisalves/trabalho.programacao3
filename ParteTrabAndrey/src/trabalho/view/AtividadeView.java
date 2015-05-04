@@ -3,6 +3,7 @@ package trabalho.view;
 import java.util.Scanner;
 
 import trabalho.model.dao.AtividadeDAO;
+
 import trabalho.model.pojo.Atividade;
 
 public class AtividadeView {
@@ -53,6 +54,18 @@ public class AtividadeView {
 			newAtividade = new Atividade(nome);
 			
 			System.out.println(this.atividades.buscar(newAtividade));
+			
+			
+		}
+		public void removerAtividade(){
+			System.out.println("\nATIVIDADE QUE DESEJA REMOVER");
+			System.out.println("\n Digite o nome:");
+			String nome = ler.nextLine();
+			
+			newAtividade = new Atividade(nome);
+			this.atividades.buscar(newAtividade);
+			this.atividades.remover(newAtividade);
+			System.out.println("Apagado com seguranca");
 			
 			
 		}

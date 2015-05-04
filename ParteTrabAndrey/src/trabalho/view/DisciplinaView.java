@@ -53,7 +53,18 @@ public class DisciplinaView {
 			
 			
 		}
-		
+		public void removerDisciplina(){
+			System.out.println("\nDISCILPINA QUE DESEJA REMOVER");
+			System.out.println("\n Digite o nome:");
+			String nome = ler.nextLine();
+			
+			newDisciplina = new Disciplina(nome);
+			this.disciplinas.buscar(newDisciplina);
+			this.disciplinas.remover(newDisciplina);
+			System.out.println("Apagado com seguranca");
+			
+			
+		}
 
 	}
 
