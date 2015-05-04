@@ -8,6 +8,7 @@ import trabalho.model.pojo.Atividade;
 public class AtividadeView {
 		
 		private static Scanner ler = new Scanner(System.in);
+		private static Scanner sc = new Scanner(System.in); 
 		private static Atividade newAtividade;
 		private AtividadeDAO atividades;
 		
@@ -25,8 +26,9 @@ public class AtividadeView {
 			String tipo = ler.nextLine();		
 			System.out.println("\n data: ");
 			String data = ler.nextLine();
-			System.out.println("\n valor: ");
-			int valor = ler.nextInt();
+			System.out.println("\n Valor: ");
+			float valor = sc.nextFloat();
+			
 			newAtividade = new Atividade(nome,tipo,data,valor);
 			
 			this.atividades.salvar(newAtividade);

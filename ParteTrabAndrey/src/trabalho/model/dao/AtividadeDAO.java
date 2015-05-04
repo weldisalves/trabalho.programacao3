@@ -1,8 +1,11 @@
 package trabalho.model.dao;
 
 import java.util.ArrayList;
+
 import java.util.List;
+
 import trabalho.model.pojo.Atividade;
+
 public class AtividadeDAO implements DAOGenerico<Atividade>{
 
 		private List<Atividade> listaAtividade;

@@ -5,13 +5,13 @@ public class Atividade {
 	private String nome;
 	private String tipo;
 	private String data;
-	private int valor;
+	private float valor;
 	
 	public Atividade(String nome){
 		this.nome=nome;
 	}
 	
-	public Atividade(String nome, String tipo, String data, int valor){
+	public Atividade(String nome, String tipo, String data, float valor){
 		this.nome = nome;
 		this.tipo = tipo;
 		this.data = data;
@@ -42,11 +42,11 @@ public class Atividade {
 		this.data = data;
 	}
 
-	public int getValor() {
+	public float getValor() {
 		return valor;
 	}
 
-	public void setValor(int valor) {
+	public void setValor(float valor) {
 		this.valor = valor;
 	}
 
