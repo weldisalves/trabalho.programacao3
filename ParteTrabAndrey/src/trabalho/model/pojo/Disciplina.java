@@ -17,8 +17,6 @@ public class Disciplina {
 		}	
 		
 	
-
-		// ainda temos que ver como sobreescrever este método
 		
 		public String getNome() {
 			return nome;

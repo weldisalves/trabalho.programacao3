@@ -6,7 +6,7 @@ import trabalho.model.pojo.Disciplina;
 public class DisciplinaView {
 
 		private static Scanner ler = new Scanner(System.in);
-		private static Scanner sc = new Scanner(System.in); 
+		 
 		private static Disciplina newDisciplina;
 		private DisciplinaDAO disciplinas;
 		
@@ -23,8 +23,8 @@ public class DisciplinaView {
 			String nome = ler.nextLine();
 			System.out.println("\n ementa: ");
 			String ementa = ler.nextLine();		
-			System.out.println("\n carga horária: ");
-			int cargahoraria = sc.nextInt(); 
+			System.out.println("\n carga horaria: ");
+			int cargahoraria = ler.nextInt(); 
 			
 			newDisciplina = new Disciplina(nome,ementa,cargahoraria);
 			

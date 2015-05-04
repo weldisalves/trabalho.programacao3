@@ -24,7 +24,6 @@ public class Aluno {
 		return this.cpf;
 	}
 
-	// ainda temos que ver como sobreescrever este método
 	
 	@Override
 	public int hashCode() {
