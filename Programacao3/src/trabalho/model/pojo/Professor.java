@@ -1,17 +1,19 @@
-﻿package trabalho.model.pojo;
+package trabalho.model.pojo;
 
-public class Aluno {
-	
+public class Professor {
+
 	private String nome;
 	private String cpf;
+	private String departamento;
 	
-	public Aluno(String cpf){
+	public Professor(String cpf){
 		this.cpf=cpf;
 	}
 	
-	public Aluno(String nome, String cpf){
+	public Professor(String nome, String cpf, String departamento){
 		this.nome = nome;
 		this.cpf = cpf;
+		this.departamento = departamento;
 	}	
 	
 	public String getNome() {
@@ -23,8 +25,15 @@ public class Aluno {
 	public String getCpf() {
 		return this.cpf;
 	}
+	public String getDepartamento() {
+		return departamento;
+	}
 
-	
+	public void setDepartamento(String departamento) {
+		this.departamento = departamento;
+	}
+
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -41,7 +50,7 @@ public class Aluno {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Aluno other = (Aluno) obj;
+		Professor other = (Professor) obj;
 		if (cpf == null) {
 			if (other.cpf != null)
 				return false;
@@ -49,10 +58,15 @@ public class Aluno {
 			return false;
 		return true;
 	}
+
+
+
 	
 	@Override
 	public String toString(){
-		return "Nome: "+this.nome + "\t Cpf: " + this.cpf;
+		return "Nome: "+this.nome + "\t Cpf: " +this.cpf + "\t Departamento: " +this.departamento ;
 	}
+
+
 	
 }

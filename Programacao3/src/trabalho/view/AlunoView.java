@@ -24,7 +24,7 @@ public class AlunoView {
 		
 		System.out.println("\n nome: ");
 		String nome = ler.nextLine();
-		System.out.println("\n CPF: ");		
+		System.out.println("\n CPF: ");
 		String cpf = ler.nextLine();		
 		
 		newAluno = new Aluno(nome,cpf);
@@ -51,7 +51,20 @@ public class AlunoView {
 		newAluno = new Aluno(cpf);
 		
 		System.out.println(this.alunos.buscar(newAluno));
-				
+		
+		
+	}
+	
+	public void removerAluno(){
+		System.out.println("\nALUNO QUE DESEJA REMOVER");
+		System.out.println("\n Digite o cpf:");
+		String cpf = ler.nextLine();
+		
+		newAluno = new Aluno(cpf);
+		this.alunos.buscar(newAluno);
+		this.alunos.remover(newAluno);
+		System.out.println("Apagado com seguranca");
+			
 	}
 	
 
