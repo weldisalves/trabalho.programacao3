@@ -4,16 +4,16 @@ public class Disciplina {
 		
 		private String nome;
 		private String ementa;
-		private int cargahoraria;
+		private int cargaHoraria;
 		
 		public Disciplina(String nome){
 			this.nome=nome;
 		}
 		
-		public Disciplina(String nome, String ementa, int cargahoraria){
+		public Disciplina(String nome, String ementa, int cargaHoraria){
 			this.nome = nome;
 			this.ementa = ementa;
-			this.cargahoraria =cargahoraria;
+			this.cargaHoraria =cargaHoraria;
 		}	
 		
 	
@@ -35,11 +35,11 @@ public class Disciplina {
 		}
 
 		public int getCargahoraria() {
-			return cargahoraria;
+			return cargaHoraria;
 		}
 
 		public void setCargahoraria(int cargahoraria) {
-			this.cargahoraria = cargahoraria;
+			this.cargaHoraria = cargahoraria;
 		}
 
 		@Override
@@ -73,7 +73,7 @@ public class Disciplina {
 		@Override
 		public String toString() {
 			return "Disciplina [Nome : " + nome + ", Ementa : " + ementa
-					+ ", Carga Horária : " + cargahoraria + "]";
+					+ ", Carga Horária : " + cargaHoraria + "]";
 		}
 		
 	}

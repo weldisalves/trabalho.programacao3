@@ -1,4 +1,5 @@
 package trabalho.view;
+import java.io.IOException;
 import java.util.Scanner;
 public class MenuPrincipal {
 	
@@ -14,7 +15,7 @@ public class MenuPrincipal {
 		    }
 
 		public static void CadastroAluno(){
-	        System.out.println("Voc gostaria de:");
+	        System.out.println("Voc� gostaria de:");
 	        System.out.println("1-Cadastrar aluno");
 	        System.out.println("2-Listar alunos");
 	        System.out.println("3-Pesquisar aluno:");
@@ -24,7 +25,7 @@ public class MenuPrincipal {
 		}
 		
 		public static void CadastroProfessor(){
-	    	 System.out.println("Voc gostaria de:");
+	    	 System.out.println("Voc� gostaria de:");
 		        System.out.println("1-Cadastrar Professor");
 		        System.out.println("2-Listar Professor");
 		        System.out.println("3-Pesquisar Professor:");
@@ -34,7 +35,7 @@ public class MenuPrincipal {
 		}
 		
 		public static void CadastroDisciplina(){
-	    	 System.out.println("Voc gostaria de:");
+	    	 System.out.println("Voc� gostaria de:");
 		        System.out.println("1-Cadastrar Disciplina");
 		        System.out.println("2-Listar Disciplinas");
 		        System.out.println("3-Pesquisar disciplina:");
@@ -44,7 +45,7 @@ public class MenuPrincipal {
 		}
 		
 		public static void CadastroTurma(){
-	    	 	System.out.println("Voc gostaria de:");
+	    	 	System.out.println("Voc� gostaria de:");
 		        System.out.println("1-Cadastrar turma");
 		        System.out.println("2-Listar turma");
 		        System.out.println("3-Pesquisar turma:");
@@ -54,7 +55,7 @@ public class MenuPrincipal {
 		 }
 		
 		public static void CadastrarAtividade(){
-		    	System.out.println("Voc gostaria de:");
+		    	System.out.println("Voc� gostaria de:");
 		        System.out.println("1-Cadastrar Atividade");
 		        System.out.println("2-Listar Atividade");
 		        System.out.println("3-Pesquisar Atividade:");
@@ -64,22 +65,30 @@ public class MenuPrincipal {
 		 }
 		
 		  
-		public static void main(String[] args) {
+		public static void main(String[] args) throws IOException {
 		    
+			
 			AlunoView alunoView = new AlunoView();
 			ProfessorView professorView = new ProfessorView();
 			DisciplinaView disciplinaView = new DisciplinaView();
 			TurmaView turmaView = new TurmaView();
 			AtividadeView atividadeView = new AtividadeView();
 			Scanner entrada = new Scanner(System.in);
+			
+			
+			
 			int opcao,opcao2;
 		        
 		        do{
+		        	
 		            Menu();
 		            opcao = entrada.nextInt();
 		            
 		            switch(opcao){
 		            case 0:
+		            	alunoView.atualizarArquivo();
+		            	atividadeView.atualizarArquivo();
+		            	disciplinaView.atualizarArquivo();
 		            	System.out.println("Encerrando sitema......\n");
 		            	System.out.println("Sistema encerrado");
 		            	break;
@@ -91,7 +100,7 @@ public class MenuPrincipal {
 				        }
 				        if(opcao2==2){
 				        	alunoView.listarAluno();
-				        }
+				       }
 				        if(opcao2==3){
 				        	alunoView.pesquisarAluno();
 				        }
@@ -176,14 +185,19 @@ public class MenuPrincipal {
 				        }
 				        if(opcao2==0){
 				        	Menu();
+				        	
 				        }
 				        break;
 		           
 		            default:
-		                System.out.println("Op‹o inv‡lida.");
+		                System.out.println("Op�‹o inv‡lida.");
 		            }
 		        } while(opcao != 0);
+		        
 		    }
+		
 }
 		
 		
+
+

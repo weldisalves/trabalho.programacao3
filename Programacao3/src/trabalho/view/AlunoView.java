@@ -1,7 +1,9 @@
 package trabalho.view;
 
 
+
 import java.util.Scanner;
+import java.io.IOException;
 
 import trabalho.model.dao.AlunoDAO;
 import trabalho.model.pojo.Aluno;
@@ -13,29 +15,35 @@ public class AlunoView {
 	private static Aluno newAluno;
 	private AlunoDAO alunos;
 	
-	public AlunoView(){
+	public AlunoView()throws IOException{
 		this.alunos = new AlunoDAO();
 	}
+	
+	
 	
 
 	public void cadastrar(){
 		
 		System.out.println("\n Cadastrar aluno");
-		
 		System.out.println("\n nome: ");
 		String nome = ler.nextLine();
 		System.out.println("\n CPF: ");
 		String cpf = ler.nextLine();		
-		
 		newAluno = new Aluno(nome,cpf);
-		
 		this.alunos.salvar(newAluno);
-				
 	}
 	
 	
 	//lista
 	
+	public void atualizarArquivo()throws IOException{
+		for(Aluno aluno : this.alunos.listar()){
+			alunos.exportar(aluno);
+
+		}
+	}
+	
+	//Arquiva os dados da lista
 	public void listarAluno(){
 		for(Aluno aluno : this.alunos.listar()){
 			System.out.println(aluno);
@@ -64,7 +72,8 @@ public class AlunoView {
 		this.alunos.buscar(newAluno);
 		this.alunos.remover(newAluno);
 		System.out.println("Apagado com seguranca");
-			
+		
+		
 	}
 	
 

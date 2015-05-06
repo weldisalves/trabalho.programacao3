@@ -17,7 +17,7 @@ public class Atividade {
 		this.data = data;
 		this.valor = valor;
 	}	
-	
+
 	public String getNome() {
 		return nome;
 	}
