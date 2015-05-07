@@ -1,5 +1,10 @@
 package trabalho.model.dao;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,11 +14,17 @@ public class TurmaDAO implements DAOGenerico<Turma> {
 
 		
 		private List<Turma> listaTurma;
+		private FileWriter arq;
+		private static Turma newTurma;
+		private BufferedReader lerArq;
 		
-		public TurmaDAO() {
+		public TurmaDAO() throws IOException {
 			this.listaTurma = new ArrayList<Turma>();
+			importar();
+			this.arq = new FileWriter("Turmas.txt",false);
 		}
 
+		
 		@Override
 		public void salvar(Turma objeto) {
 			listaTurma.add(objeto);
@@ -37,5 +48,27 @@ public class TurmaDAO implements DAOGenerico<Turma> {
 			
 			return listaTurma.get(listaTurma.indexOf(objeto));
 		}
+		
+		public void exportar(Turma turmas)throws IOException{
+			this.arq = new FileWriter("Turmas.txt",true);
+			PrintWriter gravarArq = new PrintWriter(arq);
+			gravarArq.printf("%s%n%s%n%s%n%s%n%s%n",turmas.getAno(), turmas.getPeriodo(),turmas.getLocal(),turmas.getHorario(),turmas.getNumerodevagas());
+			gravarArq.close();
+			}
+		
+		public void importar() throws IOException{
+			FileReader arq = new FileReader("Turmas.txt"); 
+			this.lerArq = new BufferedReader(arq); 
+			String ano,periodo,local, horario, numeroDeVagas;
+			for(ano = lerArq.readLine(),periodo = lerArq.readLine(),local = lerArq.readLine(),horario = lerArq.readLine(),numeroDeVagas = lerArq.readLine();ano!= null;ano = lerArq.readLine(),periodo = lerArq.readLine(),local = lerArq.readLine(),horario = lerArq.readLine(),numeroDeVagas = lerArq.readLine()){		            
+				    int periodoInt;  
+				    int vagasInt;
+				    periodoInt= Integer.parseInt(periodo); 
+				    vagasInt= Integer.parseInt(numeroDeVagas); 
+				    newTurma = new Turma(ano,periodoInt,local,horario,vagasInt);
+			    	listaTurma.add(newTurma);
+			    	}			  			    
+			    arq.close(); 
+			}
 
 }

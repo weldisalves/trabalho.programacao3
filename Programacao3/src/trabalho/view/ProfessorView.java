@@ -1,5 +1,6 @@
 package trabalho.view;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 import trabalho.model.dao.ProfessorDAO;
@@ -11,38 +12,37 @@ public class ProfessorView {
 	private static Professor newProfessor;
 	private ProfessorDAO professores;
 	
-	public ProfessorView(){
+	public ProfessorView() throws IOException{
 		this.professores = new ProfessorDAO();
 	}
 	
+	//Função que atualiza o arquivo com os dados da lista
+	public void atualizarArquivo()throws IOException{
+		for(Professor professores : this.professores.listar()){
+			this.professores.exportar(professores);
+			}
+	}
 
 	public void cadastrar(){
-		
 		System.out.println("\n Cadastrar professor");
-		
 		System.out.println("\n nome: ");
 		String nome = ler.nextLine();
 		System.out.println("\n CPF: ");
 		String cpf = ler.nextLine();
 		System.out.println("\n Departamento: ");
 		String departamento = ler.nextLine();
-		
 		newProfessor = new Professor(nome,cpf,departamento);
-		
-		this.professores.salvar(newProfessor);
-				
+		this.professores.salvar(newProfessor);	
 	}
 	
-	
 	//lista
-	
 	public void listarProfessor(){
 		for(Professor professor : this.professores.listar()){
 			System.out.println(professor);
 		}
 	}
-	//pesquisar
 	
+	//pesquisar
 	public void pesquisarProfessor(){
 		System.out.println("\n PESQUISAR PROFESSOR");
 		System.out.println("\n Digite o cpf:");
@@ -58,14 +58,11 @@ public class ProfessorView {
 		System.out.println("\nPROFESSOR QUE DESEJA REMOVER");
 		System.out.println("\n Digite o cpf:");
 		String cpf = ler.nextLine();
-		
 		newProfessor = new Professor(cpf);
 		this.professores.buscar(newProfessor);
 		this.professores.remover(newProfessor);
 		System.out.println("Apagado com seguranca");
-		
-		
-	}
+	   }
 	
 
 

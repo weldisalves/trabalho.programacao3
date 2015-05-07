@@ -1,9 +1,14 @@
 package trabalho.view;
+
 import java.io.IOException;
 import java.util.Scanner;
+
 public class MenuPrincipal {
-	
-		public static void Menu(){
+
+	private static Scanner entrada;
+
+
+	public static void Menu(){
 		        System.out.println("\tCadastro ");
 		        System.out.println("0. Fim");
 		        System.out.println("1. Aluno");
@@ -73,9 +78,7 @@ public class MenuPrincipal {
 			DisciplinaView disciplinaView = new DisciplinaView();
 			TurmaView turmaView = new TurmaView();
 			AtividadeView atividadeView = new AtividadeView();
-			Scanner entrada = new Scanner(System.in);
-			
-			
+			entrada = new Scanner(System.in);
 			
 			int opcao,opcao2;
 		        
@@ -89,7 +92,9 @@ public class MenuPrincipal {
 		            	alunoView.atualizarArquivo();
 		            	atividadeView.atualizarArquivo();
 		            	disciplinaView.atualizarArquivo();
-		            	System.out.println("Encerrando sitema......\n");
+		            	professorView.atualizarArquivo();
+		                turmaView.atualizarArquivo();
+		            	System.out.println("Salvando no Arquivo...");
 		            	System.out.println("Sistema encerrado");
 		            	break;
 		            case 1:

@@ -1,5 +1,6 @@
 package trabalho.view;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 import trabalho.model.dao.TurmaDAO;
@@ -12,7 +13,7 @@ public class TurmaView {
 		private static Turma newTurma;
 		private TurmaDAO turmas;
 		
-		public TurmaView(){
+		public TurmaView() throws IOException{
 			this.turmas = new TurmaDAO();
 		}
 		
@@ -20,7 +21,6 @@ public class TurmaView {
 		public void cadastrar(){
 			
 			System.out.println("\n Cadastrar turma");
-			
 			System.out.println("\n ano: ");
 			String ano = ler.nextLine();
 			System.out.println("\n periodo: ");
@@ -31,13 +31,17 @@ public class TurmaView {
 			String horario = ler.nextLine();
 			System.out.println("\n numero de vagas: ");
 			int numerodevagas = sc.nextInt();
-			
 			newTurma = new Turma(ano,periodo,local,horario,numerodevagas);
-			
 			this.turmas.salvar(newTurma);
 					
 		}
 		
+		
+		public void atualizarArquivo()throws IOException{
+			for(Turma turmas : this.turmas.listar()){
+				this.turmas.exportar(turmas);
+				}
+		}
 		
 		//lista
 		
