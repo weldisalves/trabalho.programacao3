@@ -8,67 +8,68 @@ public class MenuPrincipal {
 	private static Scanner entrada;
 
 
-	public static void Menu(){
+	public static void Menu() throws IOException{
+		          
 		        System.out.println("\tCadastro ");
-		        System.out.println("0. Fim");
+		        System.out.println("0. Sair/salvar no arquivo");
 		        System.out.println("1. Aluno");
 		        System.out.println("2. Professor");
 		        System.out.println("3. Disciplina");
 		        System.out.println("4. Turma");
 		        System.out.println("5. Atividade");
-		        System.out.println("Digite a opcao");
-		    }
-
+		        System.out.println("\nDigite a opcao:");
+			}
+		    
 		public static void CadastroAluno(){
-	        System.out.println("Voc� gostaria de:");
+	        System.out.println("Você gostaria de:");
 	        System.out.println("1-Cadastrar aluno");
 	        System.out.println("2-Listar alunos");
-	        System.out.println("3-Pesquisar aluno:");
-	        System.out.println("4-remover aluno:");
-	        System.out.println("0- Sair");
-	        System.out.println("Digite a opcao");
+	        System.out.println("3-Pesquisar aluno");
+	        System.out.println("4-remover aluno");
+	        System.out.println("0- Voltar ao menu principal");
+	        System.out.println("Digite a opcao:");
 		}
 		
 		public static void CadastroProfessor(){
-	    	 System.out.println("Voc� gostaria de:");
+	    	 System.out.println("Você gostaria de:");
 		        System.out.println("1-Cadastrar Professor");
 		        System.out.println("2-Listar Professor");
-		        System.out.println("3-Pesquisar Professor:");
-		        System.out.println("4-remover Professor:");
-		        System.out.println("0- Sair");
-		        System.out.println("Digite a opcao");
+		        System.out.println("3-Pesquisar Professor");
+		        System.out.println("4-remover Professor");
+		        System.out.println("0- Voltar ao menu principal");
+		        System.out.println("Digite a opcao:");
 		}
 		
 		public static void CadastroDisciplina(){
-	    	 System.out.println("Voc� gostaria de:");
+	    	 System.out.println("Você gostaria de:");
 		        System.out.println("1-Cadastrar Disciplina");
 		        System.out.println("2-Listar Disciplinas");
-		        System.out.println("3-Pesquisar disciplina:");
-		        System.out.println("4-remover disciplina:");
-		        System.out.println("0- Sair");
-		        System.out.println("Digite a opcao");
+		        System.out.println("3-Pesquisar disciplina");
+		        System.out.println("4-remover disciplina");
+		        System.out.println("0- Voltar ao menu principal");
+		        System.out.println("Digite a opcao:");
 		}
 		
 		public static void CadastroTurma(){
-	    	 	System.out.println("Voc� gostaria de:");
+	    	 	System.out.println("Você gostaria de:");
 		        System.out.println("1-Cadastrar turma");
 		        System.out.println("2-Listar turma");
-		        System.out.println("3-Pesquisar turma:");
-		        System.out.println("4-remover turma:");
-		        System.out.println("0- Sair");
-		        System.out.println("Digite a opcao");
+		        System.out.println("3-Pesquisar turma");
+		        System.out.println("4-remover turma");
+		        System.out.println("0- Voltar ao menu principal");
+		        System.out.println("Digite a opcao:");
 		 }
 		
 		public static void CadastrarAtividade(){
-		    	System.out.println("Voc� gostaria de:");
+		    	System.out.println("Você gostaria de:");
 		        System.out.println("1-Cadastrar Atividade");
 		        System.out.println("2-Listar Atividade");
-		        System.out.println("3-Pesquisar Atividade:");
-		        System.out.println("4-remover Atividade:");
-		        System.out.println("0- Sair");
-		        System.out.println("Digite a opcao");
-		 }
-		
+		        System.out.println("3-Pesquisar Atividade");
+		        System.out.println("4-remover Atividade");
+		        System.out.println("0- Voltar ao menu principal");
+		        System.out.println("Digite a opcao:");
+		}
+				
 		  
 		public static void main(String[] args) throws IOException {
 		    
@@ -96,7 +97,8 @@ public class MenuPrincipal {
 		                turmaView.atualizarArquivo();
 		            	System.out.println("Salvando no Arquivo...");
 		            	System.out.println("Sistema encerrado");
-		            	break;
+					
+		              break;
 		            case 1:
 		            	CadastroAluno();
 		            	opcao2 = entrada.nextInt();
