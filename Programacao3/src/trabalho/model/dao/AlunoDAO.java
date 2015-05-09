@@ -46,7 +46,15 @@ public class AlunoDAO implements DAOGenerico<Aluno> {
 	@Override
 	public Aluno buscar(Aluno objeto) {
 		
-		return listaAluno.get(listaAluno.indexOf(objeto));
+		int indice = this.listaAluno.indexOf(objeto);
+		
+		if(indice>=0 && indice < this.listaAluno.size()){
+		
+			return listaAluno.get(indice);
+		}
+		
+		return null;
+		
 	}
 	
 	public void exportar(Aluno objeto)throws IOException{

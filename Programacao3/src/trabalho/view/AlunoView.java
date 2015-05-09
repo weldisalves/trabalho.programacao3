@@ -69,10 +69,14 @@ public class AlunoView {
 		String cpf = ler.nextLine();
 		
 		newAluno = new Aluno(cpf);
-		this.alunos.buscar(newAluno);
-		this.alunos.remover(newAluno);
-		System.out.println("Apagado com seguranca");
 		
+		if(this.alunos.buscar(newAluno)!= null){
+			this.alunos.remover(newAluno);
+			System.out.println("Apagado com seguranca");
+			return;
+		}
+		
+		System.out.println("\n Não existe");
 		
 	}
 	
