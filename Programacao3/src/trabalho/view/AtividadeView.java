@@ -60,9 +60,13 @@ public class AtividadeView {
 			System.out.println("\n Digite o nome:");
 			String nome = ler.nextLine();
 			newAtividade = new Atividade(nome);
-			this.atividades.buscar(newAtividade);
-			this.atividades.remover(newAtividade);
-			System.out.println("Apagado com seguranca");
+			if(this.atividades.buscar(newAtividade)!= null){
+				this.atividades.remover(newAtividade);
+				System.out.println("Apagado com seguranca");
+				return;
+			}
+			
+			System.out.println("\n Não existe");
 			
 			
 		}

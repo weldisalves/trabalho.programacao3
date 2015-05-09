@@ -47,8 +47,9 @@ public class AtividadeDAO implements DAOGenerico<Atividade>{
 		@Override
 		public Atividade buscar(Atividade objeto) {
 			int indice = listaAtividade.indexOf(objeto);
-			if(indice >= 0 && indice <= listaAtividade.size())
+			if(indice >= 0 && indice <= listaAtividade.size()){
 				return listaAtividade.get(indice);
+			}
 			return null; 		
 		}
 		
