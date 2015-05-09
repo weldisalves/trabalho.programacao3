@@ -25,7 +25,7 @@ public class AtividadeView {
 			System.out.println("\n data: ");
 			String data = ler.nextLine();
 			System.out.println("\n Valor: ");
-			float valor = sc.nextFloat();
+			Double valor = sc.nextDouble();
 			newAtividade = new Atividade(nome,tipo,data,valor);
 			this.atividades.salvar(newAtividade);
 					

@@ -46,8 +46,10 @@ public class AtividadeDAO implements DAOGenerico<Atividade>{
 
 		@Override
 		public Atividade buscar(Atividade objeto) {
-			
-			return listaAtividade.get(listaAtividade.indexOf(objeto));
+			int indice = listaAtividade.indexOf(objeto);
+			if(indice >= 0 && indice <= listaAtividade.size())
+				return listaAtividade.get(indice);
+			return null; 		
 		}
 		
 		// Função que exporta os dados contidos na lista para o Arquivo
@@ -65,8 +67,8 @@ public class AtividadeDAO implements DAOGenerico<Atividade>{
 			this.lerArq = new BufferedReader(arq); 
 			String nome,tipo, data,valor;
 			    for(nome = lerArq.readLine(),tipo = lerArq.readLine(),data = lerArq.readLine(),valor = lerArq.readLine();nome!= null;nome = lerArq.readLine(),tipo = lerArq.readLine(),data = lerArq.readLine(),valor = lerArq.readLine()){
-		            float valorfloat;  
-		            valorfloat= Float.parseFloat(valor); 
+		            Double valorfloat;  
+		            valorfloat= Double.parseDouble(valor); 
 			    	newAtividade = new Atividade(nome,tipo,data,valorfloat);
 			    	listaAtividade.add(newAtividade);
 			    	}

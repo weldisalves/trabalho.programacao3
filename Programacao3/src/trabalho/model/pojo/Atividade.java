@@ -5,13 +5,21 @@ public class Atividade {
 	private String nome;
 	private String tipo;
 	private String data;
-	private float valor;
+	private Double valor;
+	
+	public Atividade(){
+		this.nome = null;
+		this.tipo = null;
+		this.data = null;
+		this.valor = 0.0;
+	}
 	
 	public Atividade(String nome){
+		this();
 		this.nome=nome;
 	}
 	
-	public Atividade(String nome, String tipo, String data, float valor){
+	public Atividade(String nome, String tipo, String data, Double valor){
 		this.nome = nome;
 		this.tipo = tipo;
 		this.data = data;
@@ -19,7 +27,7 @@ public class Atividade {
 	}	
 
 	public String getNome() {
-		return nome;
+		return this.nome;
 	}
 
 	public void setNome(String nome) {
@@ -27,7 +35,7 @@ public class Atividade {
 	}
 
 	public String getTipo() {
-		return tipo;
+		return this.tipo;
 	}
 
 	public void setTipo(String tipo) {
@@ -35,18 +43,18 @@ public class Atividade {
 	}
 
 	public String getData() {
-		return data;
+		return this.data;
 	}
 
 	public void setData(String data) {
 		this.data = data;
 	}
 
-	public float getValor() {
-		return valor;
+	public Double getValor() {
+		return this.valor;
 	}
 
-	public void setValor(float valor) {
+	public void setValor(Double valor) {
 		this.valor = valor;
 	}
 
