@@ -61,11 +61,14 @@ public class DisciplinaView {
 			System.out.println("\n Digite o nome:");
 			String nome = ler.nextLine();
 			newDisciplina = new Disciplina(nome);
-			this.disciplinas.buscar(newDisciplina);
-			this.disciplinas.remover(newDisciplina);
-			System.out.println("Apagado com seguranca");
+			if(this.disciplinas.buscar(newDisciplina)!= null){
+				this.disciplinas.remover(newDisciplina);
+				System.out.println("Apagado com seguranca");
+				return;
+			}
 			
-			
+			System.out.println("\n Não existe!!");
+				
 		}
 
 	}

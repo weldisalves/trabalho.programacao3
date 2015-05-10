@@ -45,15 +45,20 @@ public class DisciplinaDAO implements DAOGenerico<Disciplina>{
 
 		@Override
 		public Disciplina buscar(Disciplina objeto) {
+			int indice = listaDisciplina.indexOf(objeto);
 			
-			return listaDisciplina.get(listaDisciplina.indexOf(objeto));
+			if(indice >= 0 && indice < listaDisciplina.size()){
+			return listaDisciplina.get(indice);
+			}
+			
+			return null;
 		}
 		
 		
 		public void exportar(Disciplina objeto)throws IOException{
 			this.arq = new FileWriter("Disciplinas.txt",true);
 			PrintWriter gravarArq = new PrintWriter(arq);
-			gravarArq.printf("%s%n%s%n%s%n",objeto.getNome(), objeto.getEmenta(),objeto.getCargahoraria());
+			gravarArq.printf("%s%n%s%n%s%n",objeto.getNome(), objeto.getEmenta(),objeto.getCargaHoraria());
 			gravarArq.close();
 			
 			}

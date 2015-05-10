@@ -34,11 +34,11 @@ public class Disciplina {
 			this.ementa = ementa;
 		}
 
-		public int getCargahoraria() {
+		public int getCargaHoraria() {
 			return cargaHoraria;
 		}
 
-		public void setCargahoraria(int cargahoraria) {
+		public void setCargaHoraria(int cargahoraria) {
 			this.cargaHoraria = cargahoraria;
 		}
 
@@ -66,9 +66,6 @@ public class Disciplina {
 				return false;
 			return true;
 		}
-
-
-
 		
 		@Override
 		public String toString() {
