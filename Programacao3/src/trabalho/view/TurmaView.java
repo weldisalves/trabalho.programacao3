@@ -69,9 +69,12 @@ public class TurmaView {
 			String ano = ler.nextLine();
 			
 			newTurma = new Turma(ano);
-			this.turmas.buscar(newTurma);
-			this.turmas.remover(newTurma);
-			System.out.println("Apagado com seguranca");
+			if(this.turmas.buscar(newTurma)!= null){
+				this.turmas.remover(newTurma);
+				System.out.println("Apagado com seguranca");
+				return;
+			}
+			System.out.println("\n Não existe!!");
 			
 			
 		}

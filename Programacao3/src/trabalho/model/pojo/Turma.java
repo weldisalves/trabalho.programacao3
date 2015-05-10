@@ -6,24 +6,23 @@ public class Turma {
 	private int periodo;
 	private String local;
 	private String horario;
-	private int numerodevagas;
+	private int numeroDeVagas;
 	
 	public Turma(String ano){
 		this.ano=ano;
 	}
 	
-	public Turma(String ano, int periodo, String local, String horario, int numerodevagas){
+	public Turma(String ano, int periodo, String local, String horario, int numeroDeVagas){
 		this.ano = ano;
 		this.periodo = periodo;
 		this.local = local;
 		this.horario = horario;
-		this.numerodevagas = numerodevagas;
+		this.numeroDeVagas = numeroDeVagas;
 		
 	}	
 	
-
 	public String getAno() {
-		return ano;
+		return this.ano;
 	}
 
 	public void setAno(String ano) {
@@ -31,7 +30,7 @@ public class Turma {
 	}
 
 	public int getPeriodo() {
-		return periodo;
+		return this.periodo;
 	}
 
 	public void setPeriodo(int periodo) {
@@ -39,7 +38,7 @@ public class Turma {
 	}
 
 	public String getLocal() {
-		return local;
+		return this.local;
 	}
 
 	public void setLocal(String local) {
@@ -47,19 +46,19 @@ public class Turma {
 	}
 
 	public String getHorario() {
-		return horario;
+		return this.horario;
 	}
 
 	public void setHorario(String horario) {
 		this.horario = horario;
 	}
 
-	public int getNumerodevagas() {
-		return numerodevagas;
+	public int getNumeroDeVagas() {
+		return this.numeroDeVagas;
 	}
 
-	public void setNumerodevagas(int numerodevagas) {
-		this.numerodevagas = numerodevagas;
+	public void setNumeroDeVagas(int numeroDeVagas) {
+		this.numeroDeVagas = numeroDeVagas;
 	}
 
 	@Override
@@ -86,15 +85,12 @@ public class Turma {
 			return false;
 		return true;
 	}
-
-
-
 	
 	@Override
 	public String toString() {
 		return "Turma [ano : " + ano + ", periodo : " + periodo + ", local : "
 				+ local + ", horario : " + horario + ", numerodevagas : "
-				+ numerodevagas + "]";
+				+ numeroDeVagas + "]";
 	}
 	
 }

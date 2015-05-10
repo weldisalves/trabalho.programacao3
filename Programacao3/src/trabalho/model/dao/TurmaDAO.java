@@ -45,14 +45,18 @@ public class TurmaDAO implements DAOGenerico<Turma> {
 
 		@Override
 		public Turma buscar(Turma objeto) {
+			int indice = listaTurma.indexOf(objeto);
 			
-			return listaTurma.get(listaTurma.indexOf(objeto));
+			if(indice >=0 && indice < listaTurma.size()){
+				return listaTurma.get(indice);
+				}
+			return null;
 		}
 		
 		public void exportar(Turma turmas)throws IOException{
 			this.arq = new FileWriter("Turmas.txt",true);
 			PrintWriter gravarArq = new PrintWriter(arq);
-			gravarArq.printf("%s%n%s%n%s%n%s%n%s%n",turmas.getAno(), turmas.getPeriodo(),turmas.getLocal(),turmas.getHorario(),turmas.getNumerodevagas());
+			gravarArq.printf("%s%n%s%n%s%n%s%n%s%n",turmas.getAno(), turmas.getPeriodo(),turmas.getLocal(),turmas.getHorario(),turmas.getNumeroDeVagas());
 			gravarArq.close();
 			}
 		
