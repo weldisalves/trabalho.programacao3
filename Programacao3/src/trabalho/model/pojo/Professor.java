@@ -33,7 +33,6 @@ public class Professor {
 		this.departamento = departamento;
 	}
 
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -59,9 +58,6 @@ public class Professor {
 		return true;
 	}
 
-
-
-	
 	@Override
 	public String toString(){
 		return "Nome: "+this.nome + "\t Cpf: " +this.cpf + "\t Departamento: " +this.departamento ;

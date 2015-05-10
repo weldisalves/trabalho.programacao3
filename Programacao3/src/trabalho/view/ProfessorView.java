@@ -59,9 +59,13 @@ public class ProfessorView {
 		System.out.println("\n Digite o cpf:");
 		String cpf = ler.nextLine();
 		newProfessor = new Professor(cpf);
-		this.professores.buscar(newProfessor);
-		this.professores.remover(newProfessor);
-		System.out.println("Apagado com seguranca");
+		if(this.professores.buscar(newProfessor) != null){
+			this.professores.remover(newProfessor);
+			System.out.println("Apagado com seguranca");
+			return;
+		}
+		
+		System.out.println("\n Não existe!!");
 	   }
 	
 

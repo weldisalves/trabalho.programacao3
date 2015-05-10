@@ -39,8 +39,12 @@ public class ProfessorDAO implements DAOGenerico<Professor> {
 
 		@Override
 		public Professor buscar(Professor objeto) {
+			int indice = listaProfessor.indexOf(objeto);
 			
-			return listaProfessor.get(listaProfessor.indexOf(objeto));
+			if(indice >=0 && indice < listaProfessor.size()){
+			return listaProfessor.get(indice);
+			}
+			return null;
 		}
 
 		public void exportar(Professor objeto)throws IOException{
