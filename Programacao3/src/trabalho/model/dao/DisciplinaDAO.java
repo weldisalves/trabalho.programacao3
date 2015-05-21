@@ -55,15 +55,19 @@ public class DisciplinaDAO implements DAOGenerico<Disciplina>{
 		}
 		
 		
-		public void exportar(Disciplina objeto)throws IOException{
-			this.arq = new FileWriter("Disciplinas.txt",true);
+		public void exportar(Disciplina objeto){
+			try {
+				this.arq = new FileWriter("Disciplinas.txt",true);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 			PrintWriter gravarArq = new PrintWriter(arq);
 			gravarArq.printf("%s%n%s%n%s%n",objeto.getNome(), objeto.getEmenta(),objeto.getCargaHoraria());
 			gravarArq.close();
 			
 			}
 		
-		public void importar() throws IOException{
+		private void importar() throws IOException{
 			FileReader arq = new FileReader("Disciplinas.txt"); 
 			this.lerArq = new BufferedReader(arq); 
 			String nome,ementa,cargaHoraria;

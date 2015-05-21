@@ -47,14 +47,18 @@ public class ProfessorDAO implements DAOGenerico<Professor> {
 			return null;
 		}
 
-		public void exportar(Professor objeto)throws IOException{
-			this.arq = new FileWriter("Professores.txt",true);
+		public void exportar(Professor objeto){
+			try {
+				this.arq = new FileWriter("Professores.txt",true);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 			PrintWriter gravarArq = new PrintWriter(arq);
 			gravarArq.printf("%s%n%s%n%s%n",objeto.getNome(), objeto.getCpf(),objeto.getDepartamento());
 			gravarArq.close();
 			}
 		
-		public void importar() throws IOException{
+		private void importar() throws IOException{
 			FileReader arq = new FileReader("Professores.txt"); 
 			this.lerArq = new BufferedReader(arq); 
 			String nome,cpf,departamento;

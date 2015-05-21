@@ -12,6 +12,7 @@ import java.util.List;
 public interface DAOGenerico<T> {
 	void salvar(T objeto);
     void remover(T objeto);
+    void exportar (T objeto);
     List<T> listar();
     T buscar(T objeto);
     

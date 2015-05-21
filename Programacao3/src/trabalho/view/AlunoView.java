@@ -14,9 +14,10 @@ public class AlunoView {
 	private static Scanner ler = new Scanner(System.in);
 	private static Aluno newAluno;
 	private AlunoDAO alunos;
-	
 	public AlunoView()throws IOException{
 		this.alunos = new AlunoDAO();
+		// O construtor de AlunoView instancia aluno DAO
+		// e a lista de alunos é importada do arquivo.
 	}
 	
 	
@@ -25,10 +26,10 @@ public class AlunoView {
 	public void cadastrar(){
 		
 		System.out.println("\n Cadastrar aluno");
-		System.out.println("\n nome: ");
+		System.out.println("Nome: ");
 		String nome = ler.nextLine();
-		System.out.println("\n CPF: ");
-		String cpf = ler.nextLine();		
+		System.out.println("CPF: ");
+		String cpf = ler.nextLine();
 		newAluno = new Aluno(nome,cpf);
 		this.alunos.salvar(newAluno);
 	}

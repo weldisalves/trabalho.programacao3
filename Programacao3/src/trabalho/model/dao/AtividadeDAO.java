@@ -54,8 +54,12 @@ public class AtividadeDAO implements DAOGenerico<Atividade>{
 		}
 		
 		// Função que exporta os dados contidos na lista para o Arquivo
-		public void exportar(Atividade objeto)throws IOException{
-			this.arq = new FileWriter("Atividades.txt",true);
+		public void exportar(Atividade objeto){
+			try {
+				this.arq = new FileWriter("Atividades.txt",true);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 			PrintWriter gravarArq = new PrintWriter(arq);
 			gravarArq.printf("%s%n%s%n%s%n%s%n",objeto.getNome(), objeto.getTipo(),objeto.getData(),objeto.getValor());
 			gravarArq.close();
@@ -63,7 +67,7 @@ public class AtividadeDAO implements DAOGenerico<Atividade>{
 			}
 		
 		// Função de importa os dados contidos no ar
-		public void importar() throws IOException{
+		private void importar() throws IOException{
 			FileReader arq = new FileReader("Atividades.txt"); 
 			this.lerArq = new BufferedReader(arq); 
 			String nome,tipo, data,valor;

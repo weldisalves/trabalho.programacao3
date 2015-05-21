@@ -57,15 +57,19 @@ public class AlunoDAO implements DAOGenerico<Aluno> {
 		
 	}
 	
-	public void exportar(Aluno objeto)throws IOException{
-		this.arq = new FileWriter("Alunos.txt",true);
+   public void exportar(final Aluno objeto){
+		try {
+			this.arq = new FileWriter("Alunos.txt",true);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		PrintWriter gravarArq = new PrintWriter(arq);
 		gravarArq.printf("%s%n%s%n",objeto.getNome(), objeto.getCpf());
 		gravarArq.close();
 		
 	}
 	
-	public void importar() throws IOException{
+	private void importar() throws IOException{
 		FileReader arq = new FileReader("Alunos.txt"); 
 		this.lerArq = new BufferedReader(arq); 
 		String nome, cpf;

@@ -17,6 +17,7 @@ public class MenuPrincipal {
 		        System.out.println("3. Disciplina");
 		        System.out.println("4. Turma");
 		        System.out.println("5. Atividade");
+		        System.out.println("6. Salvar atualizações");
 		        System.out.println("\nDigite a opcao:");
 			}
 		    
@@ -85,9 +86,13 @@ public class MenuPrincipal {
 		        
 		        do{
 		        	
-		            Menu();
+		            Menu();		         
 		            opcao = entrada.nextInt();
-		            
+		            for(;opcao!=0&&opcao!=1&&opcao!=2&&opcao!=3&&opcao!=4&&opcao!=5&&opcao!=6;){
+		            	System.out.println("\n==== Opção inválida ====\nDigite a opção novamente:");
+		            	opcao = entrada.nextInt();
+		            }
+		          
 		            switch(opcao){
 		            case 0:
 		            	alunoView.atualizarArquivo();
@@ -96,14 +101,36 @@ public class MenuPrincipal {
 		            	professorView.atualizarArquivo();
 		                turmaView.atualizarArquivo();
 		            	System.out.println("Salvando no Arquivo...");
-		            	System.out.println("Sistema encerrado");
+		            	
 					
 		              break;
 		            case 1:
 		            	CadastroAluno();
 		            	opcao2 = entrada.nextInt();
 				        if(opcao2==1){
+				        	int opcao3;
 				        	alunoView.cadastrar();
+				        	System.out.println("\n==== Aluno cadastrado ====\nDeseja cadastrar outo aluno?\n1- Sim\n0- Não");
+				        	opcao3=entrada.nextInt();
+				        		if(opcao3==0||opcao3==1){
+				        			for(;opcao3==0||opcao3==1;){
+				        		
+				        				if(opcao3==1){
+				        					alunoView.cadastrar();
+				        					System.out.println("\n==== Aluno cadastrado ====\nDeseja cadastrar outo aluno?\n1- Sim\n0- Não");
+				        					opcao3=entrada.nextInt();
+				        				}
+				        				else if(opcao3==0){
+				        					Menu();
+				        					break;
+				        				}
+				        				else{
+				        					System.out.println("\n==== Opção inválida ====\n");	
+				        					Menu();
+				        				}
+				        			}
+				        		}
+			        			System.out.println("\n==== Opção inválida ====\n");					        		
 				        }
 				        if(opcao2==2){
 				        	alunoView.listarAluno();
@@ -195,9 +222,17 @@ public class MenuPrincipal {
 				        	
 				        }
 				        break;
+		            case 6:
+		            	alunoView.atualizarArquivo();
+		            	atividadeView.atualizarArquivo();
+		            	disciplinaView.atualizarArquivo();
+		            	professorView.atualizarArquivo();
+		                turmaView.atualizarArquivo();
+		                System.out.println("=== Salvo com sucesso ===\n");
+				        break;
 		           
 		            default:
-		                System.out.println("Op�‹o inv‡lida.");
+		            	System.out.println("\n==== Opção inválida ====\n");
 		            }
 		        } while(opcao != 0);
 		        

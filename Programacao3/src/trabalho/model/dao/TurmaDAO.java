@@ -53,14 +53,18 @@ public class TurmaDAO implements DAOGenerico<Turma> {
 			return null;
 		}
 		
-		public void exportar(Turma turmas)throws IOException{
-			this.arq = new FileWriter("Turmas.txt",true);
+		public void exportar(Turma turmas){
+			try {
+				this.arq = new FileWriter("Turmas.txt",true);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 			PrintWriter gravarArq = new PrintWriter(arq);
 			gravarArq.printf("%s%n%s%n%s%n%s%n%s%n",turmas.getAno(), turmas.getPeriodo(),turmas.getLocal(),turmas.getHorario(),turmas.getNumeroDeVagas());
 			gravarArq.close();
 			}
 		
-		public void importar() throws IOException{
+		private void importar() throws IOException{
 			FileReader arq = new FileReader("Turmas.txt"); 
 			this.lerArq = new BufferedReader(arq); 
 			String ano,periodo,local, horario, numeroDeVagas;
