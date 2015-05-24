@@ -18,6 +18,8 @@ public class Disciplina {
 			this.nome = nome;
 			this.ementa = ementa;
 			this.cargaHoraria =cargaHoraria;
+			this.professores = new ArrayList<Professor>();
+			this.turmas = new ArrayList<Turma>();
 		}	
 		
 	

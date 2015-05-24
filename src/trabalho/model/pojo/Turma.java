@@ -24,7 +24,19 @@ public class Turma {
 		this.horario = horario;
 		this.numeroDeVagas = numeroDeVagas;
 		
+		
 	}	
+	/*
+	 * construtor para criar a turma com todos os campos devidamente preenchidos 
+	 * e com a lista de alunos vazia
+	 */
+	public Turma(String ano, int periodo, String local, String horario, int numeroDeVagas,Professor professor, Disciplina disciplina){
+		this(ano,periodo,local,horario,numeroDeVagas);
+		this.professor = professor;
+		this.disciplina = disciplina;
+		this.alunos = new ArrayList<Aluno>();
+		
+	}
 	
 	public String getAno() {
 		return this.ano;

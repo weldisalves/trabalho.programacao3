@@ -12,11 +12,11 @@ public class ProfessorView {
 	private static Professor newProfessor;
 	private ProfessorDAO professores;
 	
-	public ProfessorView() throws IOException{
-		this.professores = new ProfessorDAO();
+	public ProfessorView(ProfessorDAO professores) throws IOException{
+		this.professores = professores;
 	}
 	
-	//Função que atualiza o arquivo com os dados da lista
+	//Funï¿½ï¿½o que atualiza o arquivo com os dados da lista
 	public void atualizarArquivo()throws IOException{
 		for(Professor professores : this.professores.listar()){
 			this.professores.exportar(professores);
@@ -65,10 +65,11 @@ public class ProfessorView {
 			return;
 		}
 		
-		System.out.println("\n=== CPF não cadastrado! ===\n");
+		System.out.println("\n=== CPF nï¿½o cadastrado! ===\n");
 	   }
 	
-
-
+	public ProfessorDAO getProfessores(){
+		return this.professores;
+	}
 
 }

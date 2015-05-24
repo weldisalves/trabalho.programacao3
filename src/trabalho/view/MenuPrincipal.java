@@ -3,6 +3,10 @@ package trabalho.view;
 import java.io.IOException;
 import java.util.Scanner;
 
+import trabalho.model.dao.AlunoDAO;
+import trabalho.model.dao.DisciplinaDAO;
+import trabalho.model.dao.ProfessorDAO;
+
 public class MenuPrincipal {
 	private static Scanner entrada;
 	public static void Menu() throws IOException{
@@ -70,9 +74,13 @@ public class MenuPrincipal {
 						  
 		public static void main(String[] args) throws IOException {	    
 			
-			AlunoView alunoView = new AlunoView();
-			ProfessorView professorView = new ProfessorView();
-			DisciplinaView disciplinaView = new DisciplinaView();
+			ProfessorDAO professores = new ProfessorDAO();
+			DisciplinaDAO disciplinas = new DisciplinaDAO();
+			AlunoDAO alunos = new AlunoDAO();
+			
+			AlunoView alunoView = new AlunoView(alunos);
+			ProfessorView professorView = new ProfessorView(professores);
+			DisciplinaView disciplinaView = new DisciplinaView(disciplinas);
 			TurmaView turmaView = new TurmaView();
 			AtividadeView atividadeView = new AtividadeView();
 			entrada = new Scanner(System.in);
@@ -292,7 +300,7 @@ public class MenuPrincipal {
 		            	CadastroTurma();
 		            	opcao2 = entrada.nextInt();
 				        if(opcao2==1){				        
-				        	turmaView.cadastrar();				        	
+				        	turmaView.cadastrar(professorView,disciplinaView);				        	
 				        }
 				        if(opcao2==2){
 				        	turmaView.listarTurma();

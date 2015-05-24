@@ -14,10 +14,11 @@ public class AlunoView {
 	private static Scanner ler = new Scanner(System.in);
 	private static Aluno newAluno;
 	private AlunoDAO alunos;
-	public AlunoView()throws IOException{
-		this.alunos = new AlunoDAO();
+	
+	public AlunoView(AlunoDAO alunos)throws IOException{
+		this.alunos = alunos;
 		// O construtor de AlunoView instancia aluno DAO
-		// e a lista de alunos é importada do arquivo.
+		// e a lista de alunos ï¿½ importada do arquivo.
 	}
 	
 	
@@ -81,5 +82,8 @@ public class AlunoView {
 		
 	}
 	
+	public AlunoDAO getAlunos(){
+		return alunos;
+	}
 
 }

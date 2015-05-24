@@ -72,11 +72,17 @@ public class TurmaDAO implements DAOGenerico<Turma> {
 				    int periodoInt;  
 				    int vagasInt;
 				    periodoInt= Integer.parseInt(periodo); 
-				    vagasInt= Integer.parseInt(numeroDeVagas); 
+				    vagasInt= Integer.parseInt(numeroDeVagas);
+				    
+				    //no arquivo emminha opinião eu acho melhor salvar o cpf do professor 
+				    //e na hora de carregar do arquivo... ele verificar se o professor está cadastrado 
+				    //para não ter o risco de ter 2 professores iguais e salva o endereço desse professor na turma
+				    // criei um construtor no pojo para ajudar nesta tarefa
+				    
 				    newTurma = new Turma(ano,periodoInt,local,horario,vagasInt);
 			    	listaTurma.add(newTurma);
 			    	}			  			    
-			    arq.close(); 
+			    arq.close();
 			}
 
 }

@@ -13,11 +13,11 @@ public class DisciplinaView {
 		private DisciplinaDAO disciplinas;
 		
 		
-		public DisciplinaView() throws IOException{
-			this.disciplinas = new DisciplinaDAO();
+		public DisciplinaView(DisciplinaDAO disciplinas) throws IOException{
+			this.disciplinas = disciplinas;
 		}
 		
-		//Função que atualiza o arquivo com os dados da lista
+		//Funï¿½ï¿½o que atualiza o arquivo com os dados da lista
 		public void atualizarArquivo()throws IOException{
 			for(Disciplina disciplinas : this.disciplinas.listar()){
 				this.disciplinas.exportar(disciplinas);
@@ -69,6 +69,10 @@ public class DisciplinaView {
 			
 			System.out.println("\n=== Disciplina nao cadastrada! ===\n");
 				
+		}
+
+		public DisciplinaDAO getDisciplinas() {
+			return this.disciplinas;
 		}
 
 	}

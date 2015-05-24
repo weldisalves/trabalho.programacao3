@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.Scanner;
 
 import trabalho.model.dao.TurmaDAO;
+import trabalho.model.pojo.Disciplina;
+import trabalho.model.pojo.Professor;
 import trabalho.model.pojo.Turma;
 
 public class TurmaView {
@@ -18,7 +20,7 @@ public class TurmaView {
 		}
 		
 
-		public void cadastrar(){
+		public void cadastrar(ProfessorView professores, DisciplinaView disciplinas){
 			
 			System.out.println("\n Cadastrar turma");
 			System.out.println("\n ano: ");
@@ -31,8 +33,44 @@ public class TurmaView {
 			String horario = ler.nextLine();
 			System.out.println("\n numero de vagas: ");
 			int numerodevagas = sc.nextInt();
-			newTurma = new Turma(ano,periodo,local,horario,numerodevagas);
-			this.turmas.salvar(newTurma);
+			Professor newProfessor;
+			Disciplina newDisciplina;
+			
+			if(!professores.getProfessores().listar().isEmpty() || 
+					!disciplinas.getDisciplinas().listar().isEmpty()){
+				
+			do{
+				System.out.println("\n CPF do professor: ");
+				String cpfProfessor = ler.nextLine();
+				newProfessor = new Professor(cpfProfessor);	
+				
+			}while(!professores.getProfessores().listar().contains(newProfessor));
+				
+				
+				do{
+					System.out.println("\n Nome da disciplina: ");
+					String nomeDisciplina = ler.nextLine();
+					newDisciplina = new Disciplina(nomeDisciplina);	
+					
+				}while(!disciplinas.getDisciplinas().listar().contains(newDisciplina));
+				
+				
+				
+				newProfessor = professores.getProfessores().buscar(newProfessor);
+				newDisciplina = disciplinas.getDisciplinas().buscar(newDisciplina);
+				
+				newTurma = new Turma(ano,periodo,local,horario,numerodevagas,newProfessor,newDisciplina);
+				
+				professores.getProfessores().buscar(newProfessor).getTurmas().add(newTurma);
+				professores.getProfessores().buscar(newProfessor).getDisciplinas().add(newDisciplina);
+				disciplinas.getDisciplinas().buscar(newDisciplina).getTurmas().add(newTurma);
+				disciplinas.getDisciplinas().buscar(newDisciplina).getProfessores().add(newProfessor);
+				
+				this.turmas.salvar(newTurma);
+			
+			}else{
+				System.out.println("\n Não é possível cadastrar a turma!!!");
+			}			
 					
 		}
 		
