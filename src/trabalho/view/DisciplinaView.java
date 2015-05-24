@@ -27,11 +27,11 @@ public class DisciplinaView {
         //Cadastrar
 		public void cadastrar(){
 			System.out.println("\n Cadastrar disciplina");
-			System.out.println("\n nome: ");
+			System.out.println("Nome: ");
 			String nome = ler.nextLine();
-			System.out.println("\n ementa: ");
+			System.out.println("Ementa: ");
 			String ementa = ler.nextLine();		
-			System.out.println("\n Carga horaria: ");
+			System.out.println("Carga horaria: ");
 			int cargahoraria = sc.nextInt();
 			newDisciplina = new Disciplina(nome,ementa,cargahoraria);
 			this.disciplinas.salvar(newDisciplina);
@@ -41,6 +41,7 @@ public class DisciplinaView {
 		//listar
 		
 		public void listarDisciplina(){
+			System.out.println("=== DISCILINAS: ");
 			for(Disciplina disciplina : this.disciplinas.listar()){
 				System.out.println(disciplina);
 			}
@@ -48,7 +49,7 @@ public class DisciplinaView {
 		//pesquisar
 		
 		public void pesquisarDisciplina(){
-			System.out.println("\n PESQUISAR Disciplina");
+			System.out.println("\n=== PESQUISAR Disciplina");
 			System.out.println("\n Digite o nome:");
 			String nome = ler.nextLine();
 			newDisciplina = new Disciplina(nome);
@@ -57,17 +58,16 @@ public class DisciplinaView {
 		
 		//Remover
 		public void removerDisciplina(){
-			System.out.println("\nDISCILPINA QUE DESEJA REMOVER");
-			System.out.println("\n Digite o nome:");
+			System.out.println("\nEntre com o NOME da disciplina:");	
 			String nome = ler.nextLine();
 			newDisciplina = new Disciplina(nome);
 			if(this.disciplinas.buscar(newDisciplina)!= null){
 				this.disciplinas.remover(newDisciplina);
-				System.out.println("Apagado com seguranca");
+				System.out.println("\n==== Disciplina removida ====");
 				return;
 			}
 			
-			System.out.println("\n Não existe!!");
+			System.out.println("\n=== Disciplina nao cadastrada! ===\n");
 				
 		}
 

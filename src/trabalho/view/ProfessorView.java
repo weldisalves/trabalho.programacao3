@@ -24,12 +24,11 @@ public class ProfessorView {
 	}
 
 	public void cadastrar(){
-		System.out.println("\n Cadastrar professor");
-		System.out.println("\n nome: ");
+		System.out.println("\n Cadastrar professor\n nome:");
 		String nome = ler.nextLine();
-		System.out.println("\n CPF: ");
+		System.out.println("CPF: ");
 		String cpf = ler.nextLine();
-		System.out.println("\n Departamento: ");
+		System.out.println("Departamento: ");
 		String departamento = ler.nextLine();
 		newProfessor = new Professor(nome,cpf,departamento);
 		this.professores.salvar(newProfessor);	
@@ -37,14 +36,16 @@ public class ProfessorView {
 	
 	//lista
 	public void listarProfessor(){
+		System.out.println("=== PROFESSORES: ");
 		for(Professor professor : this.professores.listar()){
 			System.out.println(professor);
 		}
+		System.out.println("\n");
 	}
 	
 	//pesquisar
 	public void pesquisarProfessor(){
-		System.out.println("\n PESQUISAR PROFESSOR");
+		System.out.println("\n=== PESQUISAR PROFESSOR");
 		System.out.println("\n Digite o cpf:");
 		String cpf = ler.nextLine();
 		
@@ -55,17 +56,16 @@ public class ProfessorView {
 		
 	}
 	public void removerProfessor(){
-		System.out.println("\nPROFESSOR QUE DESEJA REMOVER");
-		System.out.println("\n Digite o cpf:");
+		System.out.println("\nEntre com o CPF do aluno\nCPF:");	
 		String cpf = ler.nextLine();
 		newProfessor = new Professor(cpf);
 		if(this.professores.buscar(newProfessor) != null){
 			this.professores.remover(newProfessor);
-			System.out.println("Apagado com seguranca");
+			System.out.println("\n==== Professor removido ====");
 			return;
 		}
 		
-		System.out.println("\n Não existe!!");
+		System.out.println("\n=== CPF não cadastrado! ===\n");
 	   }
 	
 

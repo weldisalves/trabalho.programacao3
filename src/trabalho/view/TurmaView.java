@@ -74,7 +74,7 @@ public class TurmaView {
 				System.out.println("Apagado com seguranca");
 				return;
 			}
-			System.out.println("\n Não existe!!");
+			System.out.println("\n Nao existe!!");
 			
 			
 		}

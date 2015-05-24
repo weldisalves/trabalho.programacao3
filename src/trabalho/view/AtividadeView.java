@@ -66,7 +66,7 @@ public class AtividadeView {
 				return;
 			}
 			
-			System.out.println("\n Não existe");
+			System.out.println("\n Nao existe");
 			
 			
 		}

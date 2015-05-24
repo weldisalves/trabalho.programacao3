@@ -46,6 +46,7 @@ public class AlunoView {
 	
 	//Arquiva os dados da lista
 	public void listarAluno(){
+		System.out.println("=== ALUNOS: ");
 		for(Aluno aluno : this.alunos.listar()){
 			System.out.println(aluno);
 		}
@@ -53,7 +54,7 @@ public class AlunoView {
 	//pesquisar
 	
 	public void pesquisarAluno(){
-		System.out.println("\n PESQUISAR ALUNO");
+		System.out.println("\n=== PESQUISAR ALUNO");
 		System.out.println("\n Digite o cpf:");
 		String cpf = ler.nextLine();
 		
@@ -65,19 +66,18 @@ public class AlunoView {
 	}
 	
 	public void removerAluno(){
-		System.out.println("\nALUNO QUE DESEJA REMOVER");
-		System.out.println("\n Digite o cpf:");
+		System.out.println("\nEntre com o CPF do aluno:");	
 		String cpf = ler.nextLine();
 		
 		newAluno = new Aluno(cpf);
 		
 		if(this.alunos.buscar(newAluno)!= null){
 			this.alunos.remover(newAluno);
-			System.out.println("Apagado com seguranca");
+			System.out.println("\n==== Aluno removido ====");
 			return;
 		}
 		
-		System.out.println("\n Não existe");
+		System.out.println("\n=== CPF nao cadastrado! ===\n");
 		
 	}
 	
