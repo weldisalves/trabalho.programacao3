@@ -1,10 +1,14 @@
 package trabalho.model.pojo;
 
+import java.util.ArrayList;
+
 public class Professor {
 
 	private String nome;
 	private String cpf;
 	private String departamento;
+	private ArrayList<Disciplina> disciplinas;
+	private ArrayList<Turma> turmas;
 	
 	public Professor(String cpf){
 		this.cpf=cpf;
@@ -62,6 +66,18 @@ public class Professor {
 	public String toString(){
 		return "Nome: "+this.nome + "\t Cpf: " +this.cpf + "\t Departamento: " +this.departamento ;
 	}
+
+	public ArrayList<Disciplina> getDisciplinas() {
+		return disciplinas;
+	}
+
+	public ArrayList<Turma> getTurmas() {
+		return turmas;
+	}
+
+
+
+
 
 
 	

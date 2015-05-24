@@ -1,9 +1,13 @@
 ﻿package trabalho.model.pojo;
 
+import java.util.ArrayList;
+
 public class Aluno {
 	
 	private String nome;
 	private String cpf;
+	private ArrayList<Turma> turmas;
+	private ArrayList<Atividade> atividades;
 	
 	public Aluno(String cpf){
 		this.cpf=cpf;
@@ -53,6 +57,22 @@ public class Aluno {
 	@Override
 	public String toString(){
 		return "Nome: "+this.nome + "\t Cpf: " + this.cpf;
+	}
+
+	public ArrayList<Turma> getTurmas() {
+		return turmas;
+	}
+
+	public void setTurmas(ArrayList<Turma> turmas) {
+		this.turmas = turmas;
+	}
+
+	public ArrayList<Atividade> getAtividades() {
+		return atividades;
+	}
+
+	public void setAtividades(ArrayList<Atividade> atividades) {
+		this.atividades = atividades;
 	}
 	
 }

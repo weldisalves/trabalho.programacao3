@@ -1,10 +1,14 @@
 package trabalho.model.pojo;
 
+import java.util.ArrayList;
+
 public class Disciplina {
 		
 		private String nome;
 		private String ementa;
 		private int cargaHoraria;
+		private ArrayList<Professor> professores;
+		private ArrayList<Turma> turmas;
 		
 		public Disciplina(String nome){
 			this.nome=nome;
@@ -70,7 +74,21 @@ public class Disciplina {
 		@Override
 		public String toString() {
 			return "Disciplina [Nome : " + nome + ", Ementa : " + ementa
-					+ ", Carga Horária : " + cargaHoraria + "]";
+					+ ", Carga Horï¿½ria : " + cargaHoraria + "]";
 		}
+
+		public ArrayList<Professor> getProfessores() {
+			return professores;
+		}
+
+		public ArrayList<Turma> getTurmas() {
+			return turmas;
+		}
+
+		public void setTurmas(ArrayList<Turma> turmas) {
+			this.turmas = turmas;
+		}
+
+	
 		
 	}

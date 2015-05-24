@@ -1,5 +1,7 @@
 package trabalho.model.pojo;
 
+import java.util.ArrayList;
+
 public class Turma {
 
 	private String ano;
@@ -7,6 +9,9 @@ public class Turma {
 	private String local;
 	private String horario;
 	private int numeroDeVagas;
+	private Professor professor;
+	private Disciplina disciplina;
+	private ArrayList<Aluno> alunos;
 	
 	public Turma(String ano){
 		this.ano=ano;
@@ -91,6 +96,26 @@ public class Turma {
 		return "Turma [ano : " + ano + ", periodo : " + periodo + ", local : "
 				+ local + ", horario : " + horario + ", numerodevagas : "
 				+ numeroDeVagas + "]";
+	}
+
+	public ArrayList<Aluno> getAlunos() {
+		return alunos;
+	}
+
+	public Professor getProfessor() {
+		return professor;
+	}
+
+	public void setProfessor(Professor professor) {
+		this.professor = professor;
+	}
+
+	public Disciplina getDisciplina() {
+		return disciplina;
+	}
+
+	public void setDisciplina(Disciplina disciplina) {
+		this.disciplina = disciplina;
 	}
 	
 }

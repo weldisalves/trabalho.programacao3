@@ -1,11 +1,14 @@
 package trabalho.model.pojo;
 
+import java.util.ArrayList;
+
 public class Atividade {
 
 	private String nome;
 	private String tipo;
 	private String data;
 	private Double valor;
+	private ArrayList<Aluno> alunos;
 	
 	public Atividade(){
 		this.nome = null;
@@ -87,6 +90,14 @@ public class Atividade {
 	public String toString() {
 		return "Atividade nome : " + nome + ", tipo : " + tipo + ", data : " + data
 				+ ", valor : " + valor ;
+	}
+
+	public ArrayList<Aluno> getAlunos() {
+		return alunos;
+	}
+
+	public void setAlunos(ArrayList<Aluno> alunos) {
+		this.alunos = alunos;
 	}
 	
 }
