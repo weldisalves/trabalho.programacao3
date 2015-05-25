@@ -38,6 +38,10 @@ public class Turma {
 		
 	}
 	
+	public Turma(String ano, int periodo, String disciplina) {
+		// TODO Auto-generated constructor stub
+	}
+
 	public String getAno() {
 		return this.ano;
 	}
@@ -96,9 +100,9 @@ public class Turma {
 			return false;
 		Turma other = (Turma) obj;
 		if (ano == null) {
-			if (other.ano != null)
+			if (other.ano != null || other.periodo != 0 || other.disciplina!=null)
 				return false;
-		} else if (!ano.equals(other.ano))
+		} else if (!ano.equals(other.ano)||periodo != other.periodo||!disciplina.equals(other.disciplina))
 			return false;
 		return true;
 	}

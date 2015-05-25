@@ -6,9 +6,14 @@ import java.util.Scanner;
 import trabalho.model.dao.AlunoDAO;
 import trabalho.model.dao.DisciplinaDAO;
 import trabalho.model.dao.ProfessorDAO;
+import trabalho.model.dao.TurmaDAO;
+import trabalho.model.pojo.Aluno;
+import trabalho.model.pojo.Disciplina;
+import trabalho.model.pojo.Turma;
 
 public class MenuPrincipal {
 	private static Scanner entrada;
+	private static Scanner local;
 	public static void Menu() throws IOException{
 		          
 		        System.out.println("\n=== MENU PRINCIPAL ===");
@@ -28,6 +33,7 @@ public class MenuPrincipal {
 	        System.out.println("2-Listar alunos");
 	        System.out.println("3-Pesquisar aluno");
 	        System.out.println("4-remover aluno");
+	        System.out.println("5-cadastrar em uma turma");
 	        System.out.println("0- Voltar ao menu principal");
 	        System.out.println("\nDigite o numero correspondente a opcao:");
 		}
@@ -71,12 +77,53 @@ public class MenuPrincipal {
 		        System.out.println("0- Voltar ao menu principal");
 		        System.out.println("\nDigite o numero correspondente a opcao:");
 		}
+		
+		public static void cadastrarAlunoEmUmaTurma(AlunoDAO alunos, TurmaDAO turmas,DisciplinaDAO disciplinas){
+			System.out.println("\n Cadastrar Aluno em uma turma\n");
+			System.out.println("\n Digite o cpf do aluno: ");
+			local = new Scanner(System.in);
+			String cpf = local.nextLine();
+			Aluno newAluno = new Aluno(cpf);
+			
+			if(alunos.listar().contains(newAluno)) newAluno = alunos.buscar(newAluno);
+			
+			else{ System.out.println("\n Aluno não existe");
+			return;
+			}
+			
+			System.out.println("\n Digite o ano da turma: ");
+			String ano = local.nextLine();
+			
+			System.out.println("\n Digite o periodo: ");
+			int periodo = local.nextInt();
+			
+			System.out.println("\n Digite o nome da disciplina: ");
+			String disciplina = local.nextLine();
+			
+			Disciplina newDisciplina = new Disciplina(disciplina);
+			
+			Turma newTurma = new Turma(ano,periodo,disciplina);
+			
+			if(turmas.listar().contains(newTurma) && disciplinas.listar().contains(newDisciplina)){
+				
+				int index = turmas.listar().indexOf(newTurma);
+				
+				turmas.listar().get(index).getAlunos().add(newAluno);
+				index = alunos.listar().indexOf(newAluno);
+				alunos.listar().get(index).getTurmas().add(newTurma);
+			}
+			
+			
+			
+			
+		}
 						  
 		public static void main(String[] args) throws IOException {	    
 			
 			ProfessorDAO professores = new ProfessorDAO();
 			DisciplinaDAO disciplinas = new DisciplinaDAO();
 			AlunoDAO alunos = new AlunoDAO();
+			TurmaDAO turmas = new TurmaDAO();
 			
 			AlunoView alunoView = new AlunoView(alunos);
 			ProfessorView professorView = new ProfessorView(professores);
@@ -166,7 +213,10 @@ public class MenuPrincipal {
 				        			}
 				        		}
 			        							        		
-				        	}			        	        
+				        	}
+				        if(opcao2==5){
+				        	cadastrarAlunoEmUmaTurma(alunos,turmas,disciplinas);
+				        }
 				        
 				        if(opcao2==0){
 				        	Menu();
