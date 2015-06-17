@@ -1,7 +1,5 @@
 package model.pojo;
 
-import java.util.List;
-
 import javax.persistence.*;
 
 @Entity
