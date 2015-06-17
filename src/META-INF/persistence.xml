@@ -4,6 +4,10 @@
  <persistence-unit name="trabalhoProgramacao3">
   <provider>org.hibernate.ejb.HibernatePersistence</provider>
   <class>model.pojo.Aluno</class>
+  <class>model.pojo.Atividade</class>
+  <class>model.pojo.Disciplina</class>
+  <class>model.pojo.Professor</class>
+  <class>model.pojo.Turma</class>
   <properties>
    <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
    <property name="hibernate.hbm2ddl.auto" value="update" />
