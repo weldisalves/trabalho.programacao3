@@ -1,17 +1,19 @@
-package trabalho.model.dao;
-
-import trabalho.model.pojo.Aluno;
-import trabalho.util.JPAUtil;
+package model.dao;
 
 import java.util.List;
 
 import javax.persistence.*;
+
+import model.pojo.Aluno;
+import util.JPAUtil;
+
 
 
 public class AlunoDAO implements DAOGenerico<Aluno, Integer> {
 	
 	@Override
     public void salvar(Aluno objeto) {
+		
         EntityManager em = JPAUtil.getInstance().getEntityManager();
         EntityTransaction tx = JPAUtil.getInstance().getTransaction(em);
         em.persist(objeto);

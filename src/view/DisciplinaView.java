@@ -1,9 +1,9 @@
-package trabalho.view;
+package view;
 
 import java.util.Scanner;
 
-import trabalho.model.dao.DisciplinaDAO;
-import trabalho.model.pojo.Disciplina;
+import model.dao.DisciplinaDAO;
+import model.pojo.Disciplina;
 
 public class DisciplinaView {
 		private static Scanner ler = new Scanner(System.in);

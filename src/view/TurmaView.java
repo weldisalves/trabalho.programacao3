@@ -1,10 +1,10 @@
-package trabalho.view;
+package view;
 
 import java.io.IOException;
 import java.util.Scanner;
 
-import trabalho.model.dao.TurmaDAO;
-import trabalho.model.pojo.Turma;
+import model.dao.TurmaDAO;
+import model.pojo.Turma;
 
 public class TurmaView {
 	

@@ -3,7 +3,7 @@
  xmlns="http://java.sun.com/xml/ns/persistence">
  <persistence-unit name="trabalhoProgramacao3">
   <provider>org.hibernate.ejb.HibernatePersistence</provider>
-  <class>model.Produto</class>
+  <class>model.pojo.Aluno</class>
   <properties>
    <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
    <property name="hibernate.hbm2ddl.auto" value="update" />

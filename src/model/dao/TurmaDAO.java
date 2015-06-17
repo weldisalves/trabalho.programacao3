@@ -1,7 +1,7 @@
-package trabalho.model.dao;
+package model.dao;
 
-import trabalho.model.pojo.Turma;
-import trabalho.util.JPAUtil;
+import model.pojo.Turma;
+import util.JPAUtil;
 
 import java.util.List;
 

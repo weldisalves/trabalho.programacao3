@@ -1,9 +1,9 @@
-package trabalho.view;
+package view;
 
 import java.util.Scanner;
 
-import trabalho.model.dao.AtividadeDAO;
-import trabalho.model.pojo.Atividade;
+import model.dao.AtividadeDAO;
+import model.pojo.Atividade;
 
 public class AtividadeView {
 		private static Scanner ler = new Scanner(System.in);
@@ -52,6 +52,7 @@ public class AtividadeView {
 			
 			if(this.atividades.buscarPorNome(nome)!= null){
 				objeto = new Atividade(nome);
+				objeto = this.atividades.buscarPorNome(nome).get(this.atividades.buscarPorNome(nome).indexOf(objeto));
 				this.atividades.remover(objeto);
 				System.out.println("Apagado com seguranca");
 				return;

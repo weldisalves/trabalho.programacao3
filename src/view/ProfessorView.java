@@ -1,16 +1,16 @@
-package trabalho.view;
+package view;
 
 import java.util.Scanner;
 
-import trabalho.model.dao.ProfessorDAO;
-import trabalho.model.pojo.Professor;
+import model.dao.ProfessorDAO;
+import model.pojo.Professor;
 
 
 public class ProfessorView {
 	
 	private static Scanner ler = new Scanner(System.in);
 	private static Professor objeto;
-	private ProfessorDAO professors = new ProfessorDAO();
+	private ProfessorDAO professores = new ProfessorDAO();
 	
 	public void cadastrar(){
 		
@@ -22,13 +22,13 @@ public class ProfessorView {
 		System.out.println("Departamento: ");
 		String departamento = ler.nextLine();
 		objeto = new Professor(nome,cpf,departamento);
-		this.professors.salvar(objeto);
+		this.professores.salvar(objeto);
 	}
 		
 	//Arquiva os dados da lista
 	public void listarProfessor(){
 		System.out.println("=== PROFESSORES: ");
-		for(Professor professor : professors.listar()){
+		for(Professor professor : professores.listar()){
 			System.out.println(professor);
 		}
 	}
@@ -39,7 +39,7 @@ public class ProfessorView {
 		System.out.println("\n Digite o cpf:");
 		String cpf = ler.nextLine();
 		
-		for(Professor professor : professors.buscarPorCpf(cpf)){
+		for(Professor professor : professores.buscarPorCpf(cpf)){
 			System.out.println(professor);
 		}
 	}
@@ -49,10 +49,10 @@ public class ProfessorView {
 		System.out.println("\nEntre com o CPF do professor:");	
 		String cpf = ler.nextLine();
 						
-		if(this.professors.buscarPorCpf(cpf)!= null){
+		if(this.professores.buscarPorCpf(cpf)!= null){
 			objeto = new Professor(cpf);
-			objeto = this.professors.buscarPorCpf(cpf).get(this.professors.buscarPorCpf(cpf).indexOf(objeto));
-			this.professors.remover(objeto);
+			objeto = this.professores.buscarPorCpf(cpf).get(this.professores.buscarPorCpf(cpf).indexOf(objeto));
+			this.professores.remover(objeto);
 			System.out.println("\n==== professor removido ====");
 			return;
 		}
@@ -66,7 +66,7 @@ public class ProfessorView {
 		System.out.println("\n Entre com o ID do professor: ");
 		int id = ler.nextInt();
 		
-		System.out.println(professors.buscarPorId(id));
+		System.out.println(professores.buscarPorId(id));
 		
 	}
 	
@@ -74,7 +74,7 @@ public class ProfessorView {
 			System.out.println("=== BUSCA POR NOME: ");
 			System.out.println("\n Digite um nome: ");
 			String nome = ler.nextLine();
-			for(Professor professor : professors.buscarPorNome(nome)){
+			for(Professor professor : professores.buscarPorNome(nome)){
 				System.out.println(professor);
 			}
 		}

@@ -1,7 +1,7 @@
-package trabalho.model.dao;
+package model.dao;
 
-import trabalho.model.pojo.Professor;
-import trabalho.util.JPAUtil;
+import model.pojo.Professor;
+import util.JPAUtil;
 
 import java.util.List;
 
@@ -65,4 +65,3 @@ public class ProfessorDAO implements DAOGenerico<Professor, Integer> {
     }
 
 }
-

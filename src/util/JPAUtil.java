@@ -1,4 +1,4 @@
-package trabalho.util;
+package util;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -8,7 +8,7 @@ import javax.persistence.Persistence;
 public class JPAUtil {
 
     private static JPAUtil instance;
-    private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("default");
+    private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("trabalhoProgramacao3");
 
     private JPAUtil() {
 

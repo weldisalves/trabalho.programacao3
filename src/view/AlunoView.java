@@ -1,9 +1,9 @@
-package trabalho.view;
+package view;
 
 import java.util.Scanner;
 
-import trabalho.model.dao.AlunoDAO;
-import trabalho.model.pojo.Aluno;
+import model.dao.AlunoDAO;
+import model.pojo.Aluno;
 
 
 public class AlunoView {
@@ -23,14 +23,13 @@ public class AlunoView {
 		this.alunos.salvar(objeto);
 	}
 		
-	//Arquiva os dados da lista
+	
 	public void listarAluno(){
 		System.out.println("=== ALUNOS: ");
 		for(Aluno aluno : alunos.listar()){
 			System.out.println(aluno);
 		}
 	}
-	//pesquisar
 	
 	public void pesquisarAluno(){
 		System.out.println("\n=== PESQUISAR ALUNO");

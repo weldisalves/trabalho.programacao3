@@ -1,7 +1,7 @@
-package trabalho.model.dao;
+package model.dao;
 
-import trabalho.model.pojo.Atividade;
-import trabalho.util.JPAUtil;
+import model.pojo.Disciplina;
+import util.JPAUtil;
 
 import java.util.List;
 
@@ -10,11 +10,11 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 
 
-public class AtividadeDAO implements DAOGenerico<Atividade, Integer> {
+public class DisciplinaDAO implements DAOGenerico<Disciplina, Integer> {
 
 	
 	@Override
-    public void salvar(Atividade objeto) {
+    public void salvar(Disciplina objeto) {
         EntityManager em = JPAUtil.getInstance().getEntityManager();
         EntityTransaction tx = JPAUtil.getInstance().getTransaction(em);
         em.persist(objeto);
@@ -23,10 +23,10 @@ public class AtividadeDAO implements DAOGenerico<Atividade, Integer> {
     }
 
 	@Override
-    public void remover(Atividade objeto) {
+    public void remover(Disciplina objeto) {
         EntityManager em = JPAUtil.getInstance().getEntityManager();       
           
-        objeto = em.find(Atividade.class, objeto.getId());
+        objeto = em.find(Disciplina.class, objeto.getId());
 
         em.getTransaction().begin();
         em.remove(objeto);
@@ -35,26 +35,26 @@ public class AtividadeDAO implements DAOGenerico<Atividade, Integer> {
     }
 
 	@Override
-    public List<Atividade> listar() {
+    public List<Disciplina> listar() {
         EntityManager em = JPAUtil.getInstance().getEntityManager();
-        Query query = em.createQuery("select c from Atividade c", Atividade.class);
+        Query query = em.createQuery("select c from Disciplina c", Disciplina.class);
         List lista = query.getResultList();
         em.close();
         return lista;
     }
 
-    public List<Atividade> buscarPorNome(String nome) {
+    public List<Disciplina> buscarPorNome(String nome) {
         EntityManager em = JPAUtil.getInstance().getEntityManager();
-        Query query = em.createQuery("select c from Atividade c where c.nome like :nome", Atividade.class);
+        Query query = em.createQuery("select c from Disciplina c where c.nome like :nome", Disciplina.class);
         query.setParameter("nome", nome);
         return query.getResultList();
         
     }
 
 	@Override
-    public Atividade buscarPorId(Integer id) {
+    public Disciplina buscarPorId(Integer id) {
         EntityManager em = JPAUtil.getInstance().getEntityManager();
-        return em.find(Atividade.class, id);
+        return em.find(Disciplina.class, id);
     }
 
 }
