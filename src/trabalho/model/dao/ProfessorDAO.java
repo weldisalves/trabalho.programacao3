@@ -1,71 +1,68 @@
 package trabalho.model.dao;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
+import trabalho.model.pojo.Professor;
+import trabalho.util.JPAUtil;
+
 import java.util.List;
 
-import trabalho.model.pojo.Professor;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Query;
 
-public class ProfessorDAO implements DAOGenerico<Professor> {
-		private List<Professor> listaProfessor;
-		private FileWriter arq;
-		private static Professor newProfessor;
-		private BufferedReader lerArq;
-		
-		public ProfessorDAO() throws IOException {
-			this.listaProfessor = new ArrayList<Professor>();
-			importar();
-			this.arq = new FileWriter("Professores.txt",false);
-		}
 
-		@Override
-		public void salvar(Professor objeto) {
-			listaProfessor.add(objeto);
-		}
+public class ProfessorDAO implements DAOGenerico<Professor, Integer> {
 
-		@Override
-		public void remover(Professor objeto) {
-			listaProfessor.remove(objeto);
-		}
+	
+	@Override
+    public void salvar(Professor objeto) {
+        EntityManager em = JPAUtil.getInstance().getEntityManager();
+        EntityTransaction tx = JPAUtil.getInstance().getTransaction(em);
+        em.persist(objeto);
+        tx.commit();
+        em.close();
+    }
 
-		@Override
-		public List<Professor> listar() {
-			return this.listaProfessor;
-		}
+	@Override
+    public void remover(Professor objeto) {
+        EntityManager em = JPAUtil.getInstance().getEntityManager();       
+          
+        objeto = em.find(Professor.class, objeto.getId());
 
-		@Override
-		public Professor buscar(Professor objeto) {
-			int indice = listaProfessor.indexOf(objeto);
-			
-			if(indice >=0 && indice < listaProfessor.size()){
-			return listaProfessor.get(indice);
-			}
-			return null;
-		}
+        em.getTransaction().begin();
+        em.remove(objeto);
+        em.getTransaction().commit();
+        em.close();
+    }
 
-		public void exportar(Professor objeto){
-			try {
-				this.arq = new FileWriter("Professores.txt",true);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			PrintWriter gravarArq = new PrintWriter(arq);
-			gravarArq.printf("%s%n%s%n%s%n",objeto.getNome(), objeto.getCpf(),objeto.getDepartamento());
-			gravarArq.close();
-			}
-		
-		private void importar() throws IOException{
-			FileReader arq = new FileReader("Professores.txt"); 
-			this.lerArq = new BufferedReader(arq); 
-			String nome,cpf,departamento;
-			for(nome = lerArq.readLine(),cpf = lerArq.readLine(),departamento = lerArq.readLine();nome!= null;nome = lerArq.readLine(),cpf = lerArq.readLine(),departamento = lerArq.readLine()){		            
-		            newProfessor = new Professor(nome,cpf,departamento);
-			    	listaProfessor.add(newProfessor);
-			    	}			  			    
-			    arq.close(); 
-			}
-	}
+	@Override
+    public List<Professor> listar() {
+        EntityManager em = JPAUtil.getInstance().getEntityManager();
+        Query query = em.createQuery("select c from Professor c", Professor.class);
+        List lista = query.getResultList();
+        em.close();
+        return lista;
+    }
+
+    public List<Professor> buscarPorNome(String nome) {
+        EntityManager em = JPAUtil.getInstance().getEntityManager();
+        Query query = em.createQuery("select c from Professor c where c.nome like :nome", Professor.class);
+        query.setParameter("nome", nome);
+        return query.getResultList();
+        
+    }
+
+    public List<Professor> buscarPorCpf(String cpf) {
+        EntityManager em = JPAUtil.getInstance().getEntityManager();
+        Query query = em.createQuery("select c from Professor c where c.cpf like :cpf", Professor.class);
+        query.setParameter("cpf", cpf);
+        return query.getResultList();
+    }
+
+	@Override
+    public Professor buscarPorId(Integer id) {
+        EntityManager em = JPAUtil.getInstance().getEntityManager();
+        return em.find(Professor.class, id);
+    }
+
+}
+

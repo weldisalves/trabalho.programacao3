@@ -1,88 +1,60 @@
 package trabalho.model.dao;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
+import trabalho.model.pojo.Turma;
+import trabalho.util.JPAUtil;
+
 import java.util.List;
 
-import trabalho.model.pojo.Turma;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Query;
 
-public class TurmaDAO implements DAOGenerico<Turma> {
 
-		
-		private List<Turma> listaTurma;
-		private FileWriter arq;
-		private static Turma newTurma;
-		private BufferedReader lerArq;
-		
-		public TurmaDAO() throws IOException {
-			this.listaTurma = new ArrayList<Turma>();
-			importar();
-			this.arq = new FileWriter("Turmas.txt",false);
-		}
+public class TurmaDAO implements DAOGenerico<Turma, Integer> {
 
-		
-		@Override
-		public void salvar(Turma objeto) {
-			listaTurma.add(objeto);
-			
-		}
+	
+	@Override
+    public void salvar(Turma objeto) {
+        EntityManager em = JPAUtil.getInstance().getEntityManager();
+        EntityTransaction tx = JPAUtil.getInstance().getTransaction(em);
+        em.persist(objeto);
+        tx.commit();
+        em.close();
+    }
 
-		@Override
-		public void remover(Turma objeto) {
-			listaTurma.remove(objeto);
-			
-		}
+	@Override
+    public void remover(Turma objeto) {
+        EntityManager em = JPAUtil.getInstance().getEntityManager();       
+          
+        objeto = em.find(Turma.class, objeto.getId());
 
-		@Override
-		public List<Turma> listar() {
-			
-			return this.listaTurma;
-		}
+        em.getTransaction().begin();
+        em.remove(objeto);
+        em.getTransaction().commit();
+        em.close();
+    }
 
-		@Override
-		public Turma buscar(Turma objeto) {
-			int indice = listaTurma.indexOf(objeto);
-			
-			if(indice >=0 && indice < listaTurma.size()){
-				return listaTurma.get(indice);
-				}
-			return null;
-		}
-		
-		public void exportar(Turma turmas){
-			try {
-				this.arq = new FileWriter("Turmas.txt",true);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			PrintWriter gravarArq = new PrintWriter(arq);
-			gravarArq.printf("%s%n%s%n%s%n%s%n%s%n",turmas.getAno(), turmas.getPeriodo(),turmas.getLocal(),turmas.getHorario(),turmas.getNumeroDeVagas());
-			gravarArq.close();
-			}
-		
-		private void importar() throws IOException{
-			FileReader arq = new FileReader("Turmas.txt"); 
-			this.lerArq = new BufferedReader(arq); 
-			String ano,periodo,local, horario, numeroDeVagas;
-			for(ano = lerArq.readLine(),periodo = lerArq.readLine(),local = lerArq.readLine(),horario = lerArq.readLine(),numeroDeVagas = lerArq.readLine();ano!= null;ano = lerArq.readLine(),periodo = lerArq.readLine(),local = lerArq.readLine(),horario = lerArq.readLine(),numeroDeVagas = lerArq.readLine()){		            
-				    int periodoInt;  
-				    int vagasInt;
-				    periodoInt= Integer.parseInt(periodo); 
-				    vagasInt= Integer.parseInt(numeroDeVagas);
-				    
-				    //no arquivo emminha opinião eu acho melhor salvar o cpf do professor 
-				    //e na hora de carregar do arquivo... ele verificar se o professor está cadastrado 
-				    //para não ter o risco de ter 2 professores iguais e salva o endereço desse professor na turma
-				    // criei um construtor no pojo para ajudar nesta tarefa
-				    
-				    newTurma = new Turma(ano,periodoInt,local,horario,vagasInt);
-			    	listaTurma.add(newTurma);
-			    	}			  			    
-			    arq.close();
-			}
+	@Override
+    public List<Turma> listar() {
+        EntityManager em = JPAUtil.getInstance().getEntityManager();
+        Query query = em.createQuery("select c from Turma c", Turma.class);
+        List lista = query.getResultList();
+        em.close();
+        return lista;
+    }
+
+    public List<Turma> buscarPorAno(String ano) {
+        EntityManager em = JPAUtil.getInstance().getEntityManager();
+        Query query = em.createQuery("select c from Turma c where c.ano like :ano", Turma.class);
+        query.setParameter("ano", ano);
+        return query.getResultList();
+        
+    }
+
+	@Override
+    public Turma buscarPorId(Integer id) {
+        EntityManager em = JPAUtil.getInstance().getEntityManager();
+        return em.find(Turma.class, id);
+    }
 
 }

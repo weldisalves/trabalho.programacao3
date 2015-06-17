@@ -1,34 +1,46 @@
 ﻿package trabalho.model.pojo;
 
-import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "Alunos")
 public class Aluno {
 	
+	@Id
+	@GeneratedValue
+	private int id;
+	
+	@Column
 	private String nome;
+	
+	@Column
 	private String cpf;
-	private ArrayList<Turma> turmas;
-	private ArrayList<Atividade> atividades;
 	
+	@ManyToMany(mappedBy = "Aluno")
+	private List<Turma> turmas;
+	
+	public Aluno(){}
 	public Aluno(String cpf){
-		this.cpf=cpf;
-	}
-	
-	public Aluno(String nome, String cpf){
-		this.nome = nome;
 		this.cpf = cpf;
-	}	
-	
-	public String getNome() {
-		return this.nome;
 	}
-	public void setNome(String nome) {
+	public Aluno(String nome, String cpf) {
+		this(cpf);
 		this.nome = nome;
 	}
-	public String getCpf() {
-		return this.cpf;
-	}
-
 	
+	public String getNome() {return this.nome;	}
+	public void setNome(String nome) {this.nome = nome;	}
+	public String getCpf() {return this.cpf;	}
+	public void setCpf(String cpf){	this.cpf = cpf;	}
+	public int getId(){return this.id;}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -55,24 +67,6 @@ public class Aluno {
 	}
 	
 	@Override
-	public String toString(){
-		return "Nome: "+this.nome + "\t Cpf: " + this.cpf;
-	}
+	public String toString(){return "ID: "+this.id+"\t Nome: "+this.nome + "\t Cpf: " + this.cpf;	}
 
-	public ArrayList<Turma> getTurmas() {
-		return turmas;
-	}
-
-	public void setTurmas(ArrayList<Turma> turmas) {
-		this.turmas = turmas;
-	}
-
-	public ArrayList<Atividade> getAtividades() {
-		return atividades;
-	}
-
-	public void setAtividades(ArrayList<Atividade> atividades) {
-		this.atividades = atividades;
-	}
-	
 }

@@ -1,65 +1,48 @@
 package trabalho.model.pojo;
 
-import java.util.ArrayList;
+import javax.persistence.*;
 
+@Entity
 public class Atividade {
 
+	@Id
+	@GeneratedValue
+	private int id;
+	@Column
 	private String nome;
+	@Column
 	private String tipo;
+	@Column
 	private String data;
+	@Column
 	private Double valor;
-	private ArrayList<Aluno> alunos;
 	
-	public Atividade(){
-		this.nome = null;
-		this.tipo = null;
-		this.data = null;
-		this.valor = 0.0;
+	public Atividade(){}
+	public Atividade(String nome){ this.nome=nome; }
+	public Atividade(String nome, String tipo, String data, double valor){
+		this(nome);
+		this.tipo=tipo;
+		this.data=data;
+		this.valor=valor;
 	}
+
+	public String getNome() {return this.nome;	}
+
+	public void setNome(String nome) {this.nome = nome;	}
+
+	public String getTipo() {return this.tipo;	}
+
+	public void setTipo(String tipo) {this.tipo = tipo;	}
+
+	public String getData() {return this.data;	}
+
+	public void setData(String data) {this.data = data;	}
+
+	public Double getValor() {return this.valor;	}
+
+	public void setValor(Double valor) {this.valor = valor;	}
 	
-	public Atividade(String nome){
-		this();
-		this.nome=nome;
-	}
-	
-	public Atividade(String nome, String tipo, String data, Double valor){
-		this.nome = nome;
-		this.tipo = tipo;
-		this.data = data;
-		this.valor = valor;
-	}	
-
-	public String getNome() {
-		return this.nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public String getTipo() {
-		return this.tipo;
-	}
-
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
-	}
-
-	public String getData() {
-		return this.data;
-	}
-
-	public void setData(String data) {
-		this.data = data;
-	}
-
-	public Double getValor() {
-		return this.valor;
-	}
-
-	public void setValor(Double valor) {
-		this.valor = valor;
-	}
+	public int getId(){ return this.id; }
 
 	@Override
 	public int hashCode() {
@@ -88,16 +71,8 @@ public class Atividade {
 	
 	@Override
 	public String toString() {
-		return "Atividade nome : " + nome + ", tipo : " + tipo + ", data : " + data
-				+ ", valor : " + valor ;
+		return "ID: " + this.id + "\t Nome : " + nome + "\t Tipo : " + tipo + "\t Data : " + data
+				+ "\t valor : " + valor ;
 	}
 
-	public ArrayList<Aluno> getAlunos() {
-		return alunos;
-	}
-
-	public void setAlunos(ArrayList<Aluno> alunos) {
-		this.alunos = alunos;
-	}
-	
 }

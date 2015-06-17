@@ -1,75 +1,84 @@
 package trabalho.view;
 
-import java.io.IOException;
 import java.util.Scanner;
 
 import trabalho.model.dao.ProfessorDAO;
 import trabalho.model.pojo.Professor;
 
+
 public class ProfessorView {
-
+	
 	private static Scanner ler = new Scanner(System.in);
-	private static Professor newProfessor;
-	private ProfessorDAO professores;
+	private static Professor objeto;
+	private ProfessorDAO professors = new ProfessorDAO();
 	
-	public ProfessorView(ProfessorDAO professores) throws IOException{
-		this.professores = professores;
-	}
-	
-	//Fun��o que atualiza o arquivo com os dados da lista
-	public void atualizarArquivo()throws IOException{
-		for(Professor professores : this.professores.listar()){
-			this.professores.exportar(professores);
-			}
-	}
-
 	public void cadastrar(){
-		System.out.println("\n Cadastrar professor\n nome:");
+		
+		System.out.println("\n Cadastrar professor");
+		System.out.println("Nome: ");
 		String nome = ler.nextLine();
 		System.out.println("CPF: ");
 		String cpf = ler.nextLine();
 		System.out.println("Departamento: ");
 		String departamento = ler.nextLine();
-		newProfessor = new Professor(nome,cpf,departamento);
-		this.professores.salvar(newProfessor);	
+		objeto = new Professor(nome,cpf,departamento);
+		this.professors.salvar(objeto);
 	}
-	
-	//lista
+		
+	//Arquiva os dados da lista
 	public void listarProfessor(){
 		System.out.println("=== PROFESSORES: ");
-		for(Professor professor : this.professores.listar()){
+		for(Professor professor : professors.listar()){
 			System.out.println(professor);
 		}
-		System.out.println("\n");
 	}
-	
 	//pesquisar
+	
 	public void pesquisarProfessor(){
 		System.out.println("\n=== PESQUISAR PROFESSOR");
 		System.out.println("\n Digite o cpf:");
 		String cpf = ler.nextLine();
 		
-		newProfessor = new Professor(cpf);
-		
-		System.out.println(this.professores.buscar(newProfessor));
-		
-		
+		for(Professor professor : professors.buscarPorCpf(cpf)){
+			System.out.println(professor);
+		}
 	}
+	
 	public void removerProfessor(){
-		System.out.println("\nEntre com o CPF do aluno\nCPF:");	
+		System.out.println("\n=== REMOVER PROFESSOR");
+		System.out.println("\nEntre com o CPF do professor:");	
 		String cpf = ler.nextLine();
-		newProfessor = new Professor(cpf);
-		if(this.professores.buscar(newProfessor) != null){
-			this.professores.remover(newProfessor);
-			System.out.println("\n==== Professor removido ====");
+						
+		if(this.professors.buscarPorCpf(cpf)!= null){
+			objeto = new Professor(cpf);
+			objeto = this.professors.buscarPorCpf(cpf).get(this.professors.buscarPorCpf(cpf).indexOf(objeto));
+			this.professors.remover(objeto);
+			System.out.println("\n==== professor removido ====");
 			return;
 		}
 		
-		System.out.println("\n=== CPF n�o cadastrado! ===\n");
-	   }
-	
-	public ProfessorDAO getProfessores(){
-		return this.professores;
+		System.out.println("\n=== CPF nao cadastrado! ===\n");
+		
 	}
+	
+	public void buscarPorId(){
+		System.out.println("\n=== BUSCAR POR ID");
+		System.out.println("\n Entre com o ID do professor: ");
+		int id = ler.nextInt();
+		
+		System.out.println(professors.buscarPorId(id));
+		
+	}
+	
+	public void buscarPorNome(){
+			System.out.println("=== BUSCA POR NOME: ");
+			System.out.println("\n Digite um nome: ");
+			String nome = ler.nextLine();
+			for(Professor professor : professors.buscarPorNome(nome)){
+				System.out.println(professor);
+			}
+		}
+	
+	
 
 }

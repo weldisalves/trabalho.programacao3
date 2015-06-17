@@ -1,9 +1,6 @@
 package trabalho.view;
 
-
-
 import java.util.Scanner;
-import java.io.IOException;
 
 import trabalho.model.dao.AlunoDAO;
 import trabalho.model.pojo.Aluno;
@@ -12,18 +9,9 @@ import trabalho.model.pojo.Aluno;
 public class AlunoView {
 	
 	private static Scanner ler = new Scanner(System.in);
-	private static Aluno newAluno;
-	private AlunoDAO alunos;
+	private static Aluno objeto;
+	private AlunoDAO alunos = new AlunoDAO();
 	
-	public AlunoView(AlunoDAO alunos)throws IOException{
-		this.alunos = alunos;
-		// O construtor de AlunoView instancia aluno DAO
-		// e a lista de alunos � importada do arquivo.
-	}
-	
-	
-	
-
 	public void cadastrar(){
 		
 		System.out.println("\n Cadastrar aluno");
@@ -31,24 +19,14 @@ public class AlunoView {
 		String nome = ler.nextLine();
 		System.out.println("CPF: ");
 		String cpf = ler.nextLine();
-		newAluno = new Aluno(nome,cpf);
-		this.alunos.salvar(newAluno);
+		objeto = new Aluno(nome,cpf);
+		this.alunos.salvar(objeto);
 	}
-	
-	
-	//lista
-	
-	public void atualizarArquivo()throws IOException{
-		for(Aluno aluno : this.alunos.listar()){
-			alunos.exportar(aluno);
-
-		}
-	}
-	
+		
 	//Arquiva os dados da lista
 	public void listarAluno(){
 		System.out.println("=== ALUNOS: ");
-		for(Aluno aluno : this.alunos.listar()){
+		for(Aluno aluno : alunos.listar()){
 			System.out.println(aluno);
 		}
 	}
@@ -59,21 +37,20 @@ public class AlunoView {
 		System.out.println("\n Digite o cpf:");
 		String cpf = ler.nextLine();
 		
-		newAluno = new Aluno(cpf);
-		
-		System.out.println(this.alunos.buscar(newAluno));
-		
-		
+		for(Aluno aluno : alunos.buscarPorCpf(cpf)){
+			System.out.println(aluno);
+		}
 	}
 	
 	public void removerAluno(){
+		System.out.println("\n=== REMOVER ALUNO");
 		System.out.println("\nEntre com o CPF do aluno:");	
 		String cpf = ler.nextLine();
-		
-		newAluno = new Aluno(cpf);
-		
-		if(this.alunos.buscar(newAluno)!= null){
-			this.alunos.remover(newAluno);
+						
+		if(this.alunos.buscarPorCpf(cpf)!= null){
+			objeto = new Aluno(cpf);
+			objeto = this.alunos.buscarPorCpf(cpf).get(this.alunos.buscarPorCpf(cpf).indexOf(objeto));
+			this.alunos.remover(objeto);
 			System.out.println("\n==== Aluno removido ====");
 			return;
 		}
@@ -82,8 +59,24 @@ public class AlunoView {
 		
 	}
 	
-	public AlunoDAO getAlunos(){
-		return alunos;
+	public void buscarPorId(){
+		System.out.println("\n=== BUSCAR POR ID");
+		System.out.println("\n Entre com o ID do aluno: ");
+		int id = ler.nextInt();
+		
+		System.out.println(alunos.buscarPorId(id));
+		
 	}
+	
+	public void buscarPorNome(){
+			System.out.println("=== BUSCA POR NOME: ");
+			System.out.println("\n Digite um nome: ");
+			String nome = ler.nextLine();
+			for(Aluno aluno : alunos.buscarPorNome(nome)){
+				System.out.println(aluno);
+			}
+		}
+	
+	
 
 }

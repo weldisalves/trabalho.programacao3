@@ -1,86 +1,73 @@
 package trabalho.model.pojo;
 
-import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name="Turma")
 public class Turma {
-
-	private String ano;
-	private int periodo;
-	private String local;
-	private String horario;
-	private int numeroDeVagas;
-	private Professor professor;
-	private Disciplina disciplina;
-	private ArrayList<Aluno> alunos;
 	
-	public Turma(String ano){
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
+	@Column
+	private String ano;
+	@Column
+	private int periodo;
+	@Column
+	private String local;
+	@Column
+	private String horario;
+	@Column
+	private int numeroDeVagas;
+	
+    @ManyToMany
+    @JoinTable(name = "alunos_da_turma", joinColumns = {
+        @JoinColumn(name = "idTurma")}, inverseJoinColumns = {
+        @JoinColumn(name = "idAluno")})
+	private List<Aluno> alunos;
+    
+    @ManyToOne
+	private Disciplina disciplina;
+	
+	@ManyToOne
+	private Professor professor;
+	
+	public Turma(){}
+	public Turma(String ano) {
 		this.ano=ano;
 	}
-	
-	public Turma(String ano, int periodo, String local, String horario, int numeroDeVagas){
-		this.ano = ano;
-		this.periodo = periodo;
-		this.local = local;
-		this.horario = horario;
-		this.numeroDeVagas = numeroDeVagas;
-		
-		
-	}	
-	/*
-	 * construtor para criar a turma com todos os campos devidamente preenchidos 
-	 * e com a lista de alunos vazia
-	 */
-	public Turma(String ano, int periodo, String local, String horario, int numeroDeVagas,Professor professor, Disciplina disciplina){
-		this(ano,periodo,local,horario,numeroDeVagas);
-		this.professor = professor;
-		this.disciplina = disciplina;
-		this.alunos = new ArrayList<Aluno>();
-		
+	public Turma(String ano, int periodo, String local, String horario, int numerodevagas){
+		this(ano);
+		this.periodo=periodo;
+		this.local=local;
+		this.horario=horario;
+		this.numeroDeVagas=numerodevagas;
 	}
 	
-	public Turma(String ano, int periodo, String disciplina) {
-		// TODO Auto-generated constructor stub
-	}
 
-	public String getAno() {
-		return this.ano;
-	}
+	public String getAno() {return this.ano;	}
 
-	public void setAno(String ano) {
-		this.ano = ano;
-	}
+	public void setAno(String ano) {this.ano = ano;	}
 
-	public int getPeriodo() {
-		return this.periodo;
-	}
+	public int getPeriodo() {return this.periodo;	}
 
-	public void setPeriodo(int periodo) {
-		this.periodo = periodo;
-	}
+	public void setPeriodo(int periodo) {this.periodo = periodo;	}
 
-	public String getLocal() {
-		return this.local;
-	}
+	public String getLocal() {return this.local;	}
 
-	public void setLocal(String local) {
-		this.local = local;
-	}
+	public void setLocal(String local) {this.local = local;	}
 
-	public String getHorario() {
-		return this.horario;
-	}
+	public String getHorario() {return this.horario;	}
 
-	public void setHorario(String horario) {
-		this.horario = horario;
-	}
+	public void setHorario(String horario) {this.horario = horario; }
 
-	public int getNumeroDeVagas() {
-		return this.numeroDeVagas;
-	}
+	public int getNumeroDeVagas() {return this.numeroDeVagas; }
 
-	public void setNumeroDeVagas(int numeroDeVagas) {
-		this.numeroDeVagas = numeroDeVagas;
-	}
+	public void setNumeroDeVagas(int numeroDeVagas) {this.numeroDeVagas = numeroDeVagas; }
+	
+	public int getId(){return this.id;}
 
 	@Override
 	public int hashCode() {
@@ -90,7 +77,7 @@ public class Turma {
 		return result;
 	}
 
-	@Override
+	/*@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
@@ -105,33 +92,13 @@ public class Turma {
 		} else if (!ano.equals(other.ano)||periodo != other.periodo||!disciplina.equals(other.disciplina))
 			return false;
 		return true;
-	}
+	}*/
 	
 	@Override
 	public String toString() {
-		return "Turma [ano : " + ano + ", periodo : " + periodo + ", local : "
-				+ local + ", horario : " + horario + ", numerodevagas : "
-				+ numeroDeVagas + "]";
+		return "ID: " + this.id + "\t Ano : " + this.ano + "\t Periodo : " + this.periodo + "\t Local : "
+				+ this.local + "\t Horario : " + this.horario + "\t Numero de vagas : "
+				+ this.numeroDeVagas;
 	}
 
-	public ArrayList<Aluno> getAlunos() {
-		return alunos;
-	}
-
-	public Professor getProfessor() {
-		return professor;
-	}
-
-	public void setProfessor(Professor professor) {
-		this.professor = professor;
-	}
-
-	public Disciplina getDisciplina() {
-		return disciplina;
-	}
-
-	public void setDisciplina(Disciplina disciplina) {
-		this.disciplina = disciplina;
-	}
-	
 }

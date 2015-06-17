@@ -1,84 +1,65 @@
 package trabalho.model.dao;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
+import trabalho.model.pojo.Aluno;
+import trabalho.util.JPAUtil;
+
 import java.util.List;
 
-import trabalho.model.pojo.Aluno;
+import javax.persistence.*;
 
-public class AlunoDAO implements DAOGenerico<Aluno> {
+
+public class AlunoDAO implements DAOGenerico<Aluno, Integer> {
 	
-	private List<Aluno> listaAluno;
-	private FileWriter arq;
-	private static Aluno newAluno;
-	private BufferedReader lerArq;
-	
-	
-	public AlunoDAO() throws IOException {
-		this.listaAluno = new ArrayList<Aluno>();
-		importar();
-		this.arq = new FileWriter("Alunos.txt",false);
-	}
-	
+	@Override
+    public void salvar(Aluno objeto) {
+        EntityManager em = JPAUtil.getInstance().getEntityManager();
+        EntityTransaction tx = JPAUtil.getInstance().getTransaction(em);
+        em.persist(objeto);
+        tx.commit();
+        em.close();
+    }
 
 	@Override
-	public void salvar(Aluno objeto) {
-		listaAluno.add(objeto);
-		
-	}
+    public void remover(Aluno objeto) {
+        EntityManager em = JPAUtil.getInstance().getEntityManager();       
+          
+        objeto = em.find(Aluno.class, objeto.getId());
+
+        em.getTransaction().begin();
+        em.remove(objeto);
+        em.getTransaction().commit();
+        em.close();
+    }
 
 	@Override
-	public void remover(Aluno objeto) {
-		listaAluno.remove(objeto);
-		
-	}
+    public List<Aluno> listar() {
+        EntityManager em = JPAUtil.getInstance().getEntityManager();
+        Query query = em.createQuery("select c from Aluno c", Aluno.class);
+        List lista = query.getResultList();
+        em.close();
+        return lista;
+    }
+
+    public List<Aluno> buscarPorNome(String nome) {
+        EntityManager em = JPAUtil.getInstance().getEntityManager();
+        Query query = em.createQuery("select c from Aluno c where c.nome like :nome", Aluno.class);
+        query.setParameter("nome", nome);
+        return query.getResultList();
+        
+    }
+
+    public List<Aluno> buscarPorCpf(String cpf) {
+        EntityManager em = JPAUtil.getInstance().getEntityManager();
+        Query query = em.createQuery("select c from Aluno c where c.cpf like :cpf",
+                Aluno.class);
+        query.setParameter("cpf", cpf);
+        return query.getResultList();
+    }
 
 	@Override
-	public List<Aluno> listar() {
-		
-		return this.listaAluno;
-	}
-
-	@Override
-	public Aluno buscar(Aluno objeto) {
-		
-		int indice = this.listaAluno.indexOf(objeto);
-		
-		if(indice>=0 && indice < this.listaAluno.size()){
-		
-			return listaAluno.get(indice);
-		}
-		
-		return null;
-		
-	}
-	
-   public void exportar(final Aluno objeto){
-		try {
-			this.arq = new FileWriter("Alunos.txt",true);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		PrintWriter gravarArq = new PrintWriter(arq);
-		gravarArq.printf("%s%n%s%n",objeto.getNome(), objeto.getCpf());
-		gravarArq.close();
-		
-	}
-	
-	private void importar() throws IOException{
-		FileReader arq = new FileReader("Alunos.txt"); 
-		this.lerArq = new BufferedReader(arq); 
-		String nome, cpf;
-		    for(nome = lerArq.readLine(),cpf = lerArq.readLine();nome!= null;nome = lerArq.readLine(),cpf = lerArq.readLine() ){
-		     newAluno = new Aluno(nome,cpf);
-		     listaAluno.add(newAluno);
-		  }
-		    arq.close(); 
-     }
-
+    public Aluno buscarPorId(Integer id) {
+        EntityManager em = JPAUtil.getInstance().getEntityManager();
+        return em.find(Aluno.class, id);
+    }
 
 }

@@ -1,84 +1,60 @@
 package trabalho.model.dao;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
+import trabalho.model.pojo.Atividade;
+import trabalho.util.JPAUtil;
+
 import java.util.List;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Query;
 
 
-import trabalho.model.pojo.Atividade;
+public class AtividadeDAO implements DAOGenerico<Atividade, Integer> {
 
+	
+	@Override
+    public void salvar(Atividade objeto) {
+        EntityManager em = JPAUtil.getInstance().getEntityManager();
+        EntityTransaction tx = JPAUtil.getInstance().getTransaction(em);
+        em.persist(objeto);
+        tx.commit();
+        em.close();
+    }
 
-public class AtividadeDAO implements DAOGenerico<Atividade>{
+	@Override
+    public void remover(Atividade objeto) {
+        EntityManager em = JPAUtil.getInstance().getEntityManager();       
+          
+        objeto = em.find(Atividade.class, objeto.getId());
 
-		private List<Atividade> listaAtividade;
-		private FileWriter arq;
-		private static Atividade newAtividade;
-		private BufferedReader lerArq;
-		
-		public AtividadeDAO() throws IOException {
-			this.listaAtividade = new ArrayList<Atividade>();
-			importar();
-			this.arq = new FileWriter("Atividades.txt",false);
-		}
+        em.getTransaction().begin();
+        em.remove(objeto);
+        em.getTransaction().commit();
+        em.close();
+    }
 
-		@Override
-		public void salvar(Atividade objeto) {
-			listaAtividade.add(objeto);
-			
-		}
+	@Override
+    public List<Atividade> listar() {
+        EntityManager em = JPAUtil.getInstance().getEntityManager();
+        Query query = em.createQuery("select c from Atividade c", Atividade.class);
+        List lista = query.getResultList();
+        em.close();
+        return lista;
+    }
 
-		@Override
-		public void remover(Atividade objeto) {
-			listaAtividade.remove(objeto);
-			
-		}
+    public List<Atividade> buscarPorNome(String nome) {
+        EntityManager em = JPAUtil.getInstance().getEntityManager();
+        Query query = em.createQuery("select c from Atividade c where c.nome like :nome", Atividade.class);
+        query.setParameter("nome", nome);
+        return query.getResultList();
+        
+    }
 
-		@Override
-		public List<Atividade> listar() {
-			
-			return this.listaAtividade;
-		}
+	@Override
+    public Atividade buscarPorId(Integer id) {
+        EntityManager em = JPAUtil.getInstance().getEntityManager();
+        return em.find(Atividade.class, id);
+    }
 
-		@Override
-		public Atividade buscar(Atividade objeto) {
-			int indice = listaAtividade.indexOf(objeto);
-			if(indice >= 0 && indice <= listaAtividade.size()){
-				return listaAtividade.get(indice);
-			}
-			return null; 		
-		}
-		
-		// Função que exporta os dados contidos na lista para o Arquivo
-		public void exportar(Atividade objeto){
-			try {
-				this.arq = new FileWriter("Atividades.txt",true);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			PrintWriter gravarArq = new PrintWriter(arq);
-			gravarArq.printf("%s%n%s%n%s%n%s%n",objeto.getNome(), objeto.getTipo(),objeto.getData(),objeto.getValor());
-			gravarArq.close();
-			
-			}
-		
-		// Função de importa os dados contidos no ar
-		private void importar() throws IOException{
-			FileReader arq = new FileReader("Atividades.txt"); 
-			this.lerArq = new BufferedReader(arq); 
-			String nome,tipo, data,valor;
-			    for(nome = lerArq.readLine(),tipo = lerArq.readLine(),data = lerArq.readLine(),valor = lerArq.readLine();nome!= null;nome = lerArq.readLine(),tipo = lerArq.readLine(),data = lerArq.readLine(),valor = lerArq.readLine()){
-		            Double valorfloat;  
-		            valorfloat= Double.parseDouble(valor); 
-			    	newAtividade = new Atividade(nome,tipo,data,valorfloat);
-			    	listaAtividade.add(newAtividade);
-			    	}
-			    arq.close(); 
-			}
-
-
-	}
+}

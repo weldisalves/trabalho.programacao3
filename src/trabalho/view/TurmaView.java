@@ -4,23 +4,21 @@ import java.io.IOException;
 import java.util.Scanner;
 
 import trabalho.model.dao.TurmaDAO;
-import trabalho.model.pojo.Disciplina;
-import trabalho.model.pojo.Professor;
 import trabalho.model.pojo.Turma;
 
 public class TurmaView {
 	
 		private static Scanner ler = new Scanner(System.in);
 		private static Scanner sc = new Scanner(System.in); 
-		private static Turma newTurma;
-		private TurmaDAO turmas;
+		private static Turma objeto;
+		private TurmaDAO turmas = new TurmaDAO();
 		
 		public TurmaView() throws IOException{
 			this.turmas = new TurmaDAO();
 		}
 		
 
-		public void cadastrar(ProfessorView professores, DisciplinaView disciplinas){
+		public void cadastrar(){
 			
 			System.out.println("\n Cadastrar turma");
 			System.out.println("\n ano: ");
@@ -33,52 +31,10 @@ public class TurmaView {
 			String horario = ler.nextLine();
 			System.out.println("\n numero de vagas: ");
 			int numerodevagas = sc.nextInt();
-			Professor newProfessor;
-			Disciplina newDisciplina;
 			
-			if(!professores.getProfessores().listar().isEmpty() || 
-					!disciplinas.getDisciplinas().listar().isEmpty()){
-				
-			do{
-				System.out.println("\n CPF do professor: ");
-				String cpfProfessor = ler.nextLine();
-				newProfessor = new Professor(cpfProfessor);	
-				
-			}while(!professores.getProfessores().listar().contains(newProfessor));
-				
-				
-				do{
-					System.out.println("\n Nome da disciplina: ");
-					String nomeDisciplina = ler.nextLine();
-					newDisciplina = new Disciplina(nomeDisciplina);	
+			objeto = new Turma(ano,periodo,local,horario,numerodevagas);
+			this.turmas.salvar(objeto);		
 					
-				}while(!disciplinas.getDisciplinas().listar().contains(newDisciplina));
-				
-				
-				
-				newProfessor = professores.getProfessores().buscar(newProfessor);
-				newDisciplina = disciplinas.getDisciplinas().buscar(newDisciplina);
-				
-				newTurma = new Turma(ano,periodo,local,horario,numerodevagas,newProfessor,newDisciplina);
-				
-				professores.getProfessores().buscar(newProfessor).getTurmas().add(newTurma);
-				professores.getProfessores().buscar(newProfessor).getDisciplinas().add(newDisciplina);
-				disciplinas.getDisciplinas().buscar(newDisciplina).getTurmas().add(newTurma);
-				disciplinas.getDisciplinas().buscar(newDisciplina).getProfessores().add(newProfessor);
-				
-				this.turmas.salvar(newTurma);
-			
-			}else{
-				System.out.println("\n Não é possível cadastrar a turma!!!");
-			}			
-					
-		}
-		
-		
-		public void atualizarArquivo()throws IOException{
-			for(Turma turmas : this.turmas.listar()){
-				this.turmas.exportar(turmas);
-				}
 		}
 		
 		//lista
@@ -95,25 +51,32 @@ public class TurmaView {
 			System.out.println("\n Digite o ano:");
 			String ano = ler.nextLine();
 			
-			newTurma = new Turma(ano);
+			for(Turma turma: this.turmas.buscarPorAno(ano)){
+				System.out.println(turma);
+			}			
+		}
+		
+		public void removerTurma(){
+			System.out.println("\nTURMA QUE DESEJA REMOVER");
+			System.out.println("\n Digite o ID da Turma: ");
+			int id = ler.nextInt();
+							
+			if(this.turmas.buscarPorId(id)!= null){
+				this.turmas.remover(this.turmas.buscarPorId(id));
+				System.out.println("\n==== Aluno removido ====");
+				return;
+			}
 			
-			System.out.println(this.turmas.buscar(newTurma));
+			System.out.println("\n=== CPF nao cadastrado! ===\n");
 			
 			
 		}
-		public void removerTurma(){
-			System.out.println("\nTURMA QUE DESEJA REMOVER");
-			System.out.println("\n Digite o ano:");
-			String ano = ler.nextLine();
+		public void buscarPorId(){
+			System.out.println("\n=== BUSCAR POR ID");
+			System.out.println("\n Entre com o ID da Turma: ");
+			int id = ler.nextInt();
 			
-			newTurma = new Turma(ano);
-			if(this.turmas.buscar(newTurma)!= null){
-				this.turmas.remover(newTurma);
-				System.out.println("Apagado com seguranca");
-				return;
-			}
-			System.out.println("\n Nao existe!!");
-			
+			System.out.println(turmas.buscarPorId(id));
 			
 		}
 }

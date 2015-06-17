@@ -1,6 +1,5 @@
 package trabalho.view;
 
-import java.io.IOException;
 import java.util.Scanner;
 
 import trabalho.model.dao.DisciplinaDAO;
@@ -9,20 +8,8 @@ import trabalho.model.pojo.Disciplina;
 public class DisciplinaView {
 		private static Scanner ler = new Scanner(System.in);
 		private static Scanner sc = new Scanner(System.in); 
-		private static Disciplina newDisciplina;
-		private DisciplinaDAO disciplinas;
-		
-		
-		public DisciplinaView(DisciplinaDAO disciplinas) throws IOException{
-			this.disciplinas = disciplinas;
-		}
-		
-		//Fun��o que atualiza o arquivo com os dados da lista
-		public void atualizarArquivo()throws IOException{
-			for(Disciplina disciplinas : this.disciplinas.listar()){
-				this.disciplinas.exportar(disciplinas);
-				}
-		}
+		private static Disciplina objeto;
+		private DisciplinaDAO disciplinas = new DisciplinaDAO();
 		
         //Cadastrar
 		public void cadastrar(){
@@ -33,8 +20,8 @@ public class DisciplinaView {
 			String ementa = ler.nextLine();		
 			System.out.println("Carga horaria: ");
 			int cargahoraria = sc.nextInt();
-			newDisciplina = new Disciplina(nome,ementa,cargahoraria);
-			this.disciplinas.salvar(newDisciplina);
+			objeto = new Disciplina(nome,ementa,cargahoraria);
+			this.disciplinas.salvar(objeto);
 					
 		}
 				
@@ -52,27 +39,36 @@ public class DisciplinaView {
 			System.out.println("\n=== PESQUISAR Disciplina");
 			System.out.println("\n Digite o nome:");
 			String nome = ler.nextLine();
-			newDisciplina = new Disciplina(nome);
-			System.out.println(this.disciplinas.buscar(newDisciplina));	
+			objeto = new Disciplina(nome);
+			
+			for(Disciplina disciplina : this.disciplinas.buscarPorNome(nome)){
+				System.out.println(disciplina);
+			}	
 		}
 		
-		//Remover
 		public void removerDisciplina(){
-			System.out.println("\nEntre com o NOME da disciplina:");	
+			System.out.println("\n=== REMOVER DISCIPLINA");
+			System.out.println("\nEntre com o nome:");	
 			String nome = ler.nextLine();
-			newDisciplina = new Disciplina(nome);
-			if(this.disciplinas.buscar(newDisciplina)!= null){
-				this.disciplinas.remover(newDisciplina);
-				System.out.println("\n==== Disciplina removida ====");
+							
+			if(this.disciplinas.buscarPorNome(nome)!= null){
+				objeto = new Disciplina(nome);
+				objeto = this.disciplinas.buscarPorNome(nome).get(this.disciplinas.buscarPorNome(nome).indexOf(objeto));
+				this.disciplinas.remover(objeto);
+				System.out.println("\n===Disciplina removido ====");
 				return;
 			}
 			
-			System.out.println("\n=== Disciplina nao cadastrada! ===\n");
-				
+			System.out.println("\n=== Nome nao cadastrado! ===\n");
+			
 		}
-
-		public DisciplinaDAO getDisciplinas() {
-			return this.disciplinas;
+		
+		public void buscarPorId(){
+			System.out.println("\n=== BUSCAR POR ID");
+			System.out.println("\n Entre com o ID da Disciplina: ");
+			int id = ler.nextInt();
+			
+			System.out.println(disciplinas.buscarPorId(id));
+			
 		}
-
 	}

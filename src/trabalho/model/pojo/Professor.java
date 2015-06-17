@@ -1,26 +1,40 @@
 package trabalho.model.pojo;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class Professor {
+import javax.persistence.*;
 
+@Entity
+@Table(name = "Professor")
+public class Professor {
+	
+	@Id
+	@GeneratedValue
+	private int idProfessor;
+	@Column
 	private String nome;
+	@Column
 	private String cpf;
+	@Column
 	private String departamento;
-	private List<Disciplina> disciplinas;
+	
+	@OneToMany(mappedBy = "Professor", fetch = FetchType.LAZY)
 	private List<Turma> turmas;
 	
+    @ManyToMany(mappedBy = "Professor")
+	private List<Disciplina> disciplinas;
+	
+	
+	
+	public Professor(){}
 	public Professor(String cpf){
 		this.cpf=cpf;
 	}
 	
 	public Professor(String nome, String cpf, String departamento){
+		this(cpf);
 		this.nome = nome;
-		this.cpf = cpf;
 		this.departamento = departamento;
-		this.disciplinas = new ArrayList<Disciplina>();
-		this.turmas = new ArrayList<Turma>();
 	}	
 	
 	public String getNome() {
@@ -67,21 +81,8 @@ public class Professor {
 
 	@Override
 	public String toString(){
-		return "Nome: "+this.nome + "\t Cpf: " +this.cpf + "\t Departamento: " +this.departamento ;
+		return "ID: "+this.idProfessor+ "\t Nome: "+this.nome + "\t Cpf: " +this.cpf + "\t Departamento: " +this.departamento ;
 	}
-
-	public List<Disciplina> getDisciplinas() {
-		return disciplinas;
-	}
-
-	public List<Turma> getTurmas() {
-		return turmas;
-	}
-
-
-
-
-
-
+	public int getId() { return this.idProfessor;}
 	
 }
