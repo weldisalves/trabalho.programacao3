@@ -1,10 +1,8 @@
 package model.pojo;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import java.util.List;
+
+import javax.persistence.*;
 
 @Entity
 @Table(name = "Alunos")
@@ -12,13 +10,14 @@ public class Aluno {
 	
 	@Id
 	@GeneratedValue
-	private int id;
-	
+	private int idAluno;
 	@Column
 	private String nome;
-	
 	@Column
 	private String cpf;
+	
+	@ManyToMany(mappedBy="listaAlunos")
+	private List<Turma> listaTurmas;
 	
 	public Aluno(){}
 	public Aluno(String cpf){
@@ -27,13 +26,14 @@ public class Aluno {
 	public Aluno(String nome, String cpf) {
 		this(cpf);
 		this.nome = nome;
+		
 	}
 	
 	public String getNome() {return this.nome;	}
 	public void setNome(String nome) {this.nome = nome;	}
 	public String getCpf() {return this.cpf;	}
 	public void setCpf(String cpf){	this.cpf = cpf;	}
-	public int getId(){return this.id;}
+	public int getId(){return this.idAluno;}
 
 	@Override
 	public int hashCode() {
@@ -61,6 +61,6 @@ public class Aluno {
 	}
 	
 	@Override
-	public String toString(){return "ID: "+this.id+"\t Nome: "+this.nome + "\t Cpf: " + this.cpf;	}
+	public String toString(){return "ID: "+this.idAluno+"\t Nome: "+this.nome + "\t Cpf: " + this.cpf;	}
 
 }

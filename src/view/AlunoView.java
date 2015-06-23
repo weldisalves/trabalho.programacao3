@@ -76,6 +76,30 @@ public class AlunoView {
 			}
 		}
 	
+	public void alterarNome(){
+		System.out.println("\n=== ALTERAR NOME");
+		System.out.println("Digite o ID do aluno: ");
+		int idAluno = ler.nextInt();
+		
+		System.out.println("Digite o novo nome: ");
+		String nome = ler.next();
+		
+		alunos.alterarNome(idAluno,nome);
+		
+	}
+	
+	public void alterarCpf(){
+		System.out.println("\n=== ALTERAR CPF");
+		System.out.println("Digite o ID do aluno: ");
+		int idAluno = ler.nextInt();
+		
+		System.out.println("Digite o novo cpf: ");
+		String cpf = ler.next();
+		
+		alunos.alterarNome(idAluno,cpf);
+		
+	}
+	
 	
 
 }

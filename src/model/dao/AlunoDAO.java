@@ -63,5 +63,29 @@ public class AlunoDAO implements DAOGenerico<Aluno, Integer> {
         EntityManager em = JPAUtil.getInstance().getEntityManager();
         return em.find(Aluno.class, id);
     }
+	
+	public void alterarNome(int id,String nome){
+				
+		EntityManager em = JPAUtil.getInstance().getEntityManager();       
+		em.getTransaction().begin();
+        Aluno objeto = em.find(Aluno.class, id);
+        objeto.setNome(nome);
+        em.getTransaction().commit();
+        em.close();  
+  
+	}
+	
+	public void alterarCpf(int id,String cpf){
+		
+		EntityManager em = JPAUtil.getInstance().getEntityManager();       
+		em.getTransaction().begin();
+        Aluno objeto = em.find(Aluno.class, id);
+        objeto.setNome(cpf);
+        em.getTransaction().commit();
+        em.close();  
+  
+	}
+	
+	
 
 }
