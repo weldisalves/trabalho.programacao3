@@ -1,5 +1,7 @@
 package model.pojo;
 
+import java.util.List;
+
 import javax.persistence.*;
 
 @Entity
@@ -8,14 +10,25 @@ public class Disciplina {
 		
 	@Id
 	@GeneratedValue
-	private int id;
+	private int idDisciplina;
 	@Column
 	private String nome;
 	@Column
 	private String ementa;
 	@Column
 	private int cargaHoraria;
-		
+	@Column
+	private int numeroDeTurmasOfertadas;
+	
+	@ManyToMany
+    @JoinTable(name="DisciplinaTemProfessor", joinColumns={@JoinColumn(name="idDisciplina")}, 
+    inverseJoinColumns={@JoinColumn(name="idProfessor")})
+    private List<Professor> listaProfessores;
+	
+	//@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+   // @JoinColumn(name="idDisciplina")
+   // private List<Turma> listaTurmas;
+	
 	public Disciplina(){}
 	public Disciplina(String nome){
 		this.nome=nome;
@@ -44,8 +57,11 @@ public class Disciplina {
 		public void setCargaHoraria(int cargahoraria) {
 		this.cargaHoraria = cargahoraria;
 	}
+		public void setListaProfessores(Professor newProfessor){
+			this.listaProfessores.add(newProfessor);
+		}
 		
-		public int getId(){ return this.id; }
+		public int getId(){ return this.idDisciplina; }
 		@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -72,7 +88,7 @@ public class Disciplina {
 	
 	@Override
 	public String toString() {
-		return "ID: "+ this.id + "\t Nome : " + nome + ", Ementa : " + ementa
+		return "ID: "+ this.idDisciplina + "\t Nome : " + nome + ", Ementa : " + ementa
 				+ ", Carga Hor�ria : " + cargaHoraria ;
 	}
 	
