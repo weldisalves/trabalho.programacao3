@@ -13,7 +13,7 @@ import java.util.Scanner;
 		        System.out.println("3. Disciplina");
 		        System.out.println("4. Turma");
 		        System.out.println("5. Atividade");
-		        System.out.println("6. Salvar atualizações");
+		        System.out.println("6. Gerenciador");
 		        System.out.println("\nDigite o numero correspondente a opcao:");
 			}
 		    
@@ -74,6 +74,20 @@ import java.util.Scanner;
 		        System.out.println("0- Voltar ao menu principal");
 			        System.out.println("\nDigite o numero correspondente a opcao:");
 		}
+		
+		public static int PainelGerenciador(){
+			Scanner ler = new Scanner(System.in);
+			
+			System.out.println("=== OPÇÕES");
+			System.out.println("1-Cadastrar Professor em Disciplina"); 
+			System.out.println("2-Alterar Aluno");
+			System.out.println("0-Sair");
+			System.out.println("\n Digite a opção: ");
+			
+			int opcao = ler.nextInt();
+			return opcao;
+			
+		}
 		/*
 		public static void cadastrarAlunoEmUmaTurma(AlunoDAO alunos, TurmaDAO turmas,DisciplinaDAO disciplinas){
 			System.out.println("\n Cadastrar Aluno em uma turma\n");
@@ -122,6 +136,7 @@ import java.util.Scanner;
 				DisciplinaView disciplinaView = new DisciplinaView();
 				AtividadeView atividadeView = new AtividadeView();
 				TurmaView turmaView = new TurmaView();
+				GerenciadorView gerenciadorView = new GerenciadorView();
 
 				entrada = new Scanner(System.in);
 				
@@ -376,6 +391,21 @@ import java.util.Scanner;
 					        	
 					        }
 					        break;
+			            case 6:
+			            	int opcao4;
+							do{
+			            		opcao4 = PainelGerenciador();
+			            		
+			            		switch(opcao4){
+			            		case 1:
+			            			gerenciadorView.adicionarProfessorADisciplina();
+			            			break;
+			            		
+			            		case 2:
+			            			gerenciadorView.alterarAluno();
+			            			break;
+			            		}
+			            	}while(opcao4 != 0);
 			            
 			            default:
 			            	System.out.println("\n==== Opção inválida ====\n");
