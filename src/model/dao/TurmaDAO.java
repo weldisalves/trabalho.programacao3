@@ -56,5 +56,20 @@ public class TurmaDAO implements DAOGenerico<Turma, Integer> {
         EntityManager em = JPAUtil.getInstance().getEntityManager();
         return em.find(Turma.class, id);
     }
+	
+	public int consultarTurma(String ano, int periodo, String disciplina){
+		EntityManager em = JPAUtil.getInstance().getEntityManager();
+        Query query = em.createQuery("select c from Turma c where c.ano, c.periodo, c.disciplina like :ano,periodo,disciplina", Turma.class);
+        query.setParameter("ano",ano);
+        query.setParameter("periodo",periodo);
+        query.setParameter("disciplina",disciplina);
+        Turma turma = (Turma) query.getSingleResult();
+		return 0;
+		
+	}
+	
+	public void alterarFaltasDoALuno(int idAluno,int idTurma){
+		
+	}
 
 }

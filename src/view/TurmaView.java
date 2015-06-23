@@ -3,6 +3,8 @@ package view;
 import java.io.IOException;
 import java.util.Scanner;
 
+import model.dao.AlunoDAO;
+import model.dao.FaltaDAO;
 import model.dao.TurmaDAO;
 import model.pojo.Turma;
 
@@ -12,6 +14,7 @@ public class TurmaView {
 		private static Scanner sc = new Scanner(System.in); 
 		private static Turma objeto;
 		private TurmaDAO turmas = new TurmaDAO();
+		private FaltaDAO faltaDAO = new FaltaDAO();
 		
 		public TurmaView() throws IOException{
 			this.turmas = new TurmaDAO();
@@ -78,6 +81,34 @@ public class TurmaView {
 			
 			System.out.println(turmas.buscarPorId(id));
 			
+		}
+		
+		public void consultarTurma(){
+			System.out.println("\n PESQUISAR TURMA");
+			System.out.println("\n Digite a disciplina: ");
+			String disciplina = ler.nextLine();
+			System.out.println("\n Digite o ano: ");
+			String ano = ler.nextLine();
+			System.out.println("\n Digite  o periodo: ");
+			int periodo = ler.nextInt();
+			
+			for(Turma turma: this.turmas.buscarPorAno(ano)){
+				System.out.println(turma);
+			}			
+		}
+		
+		public void adicionarFaltasAAluno(){
+			System.out.println("\n=== FALTAS");
+			System.out.println("\n Digite o ID da turma: ");
+			int idTurma = ler.nextInt();
+			
+			System.out.println("\n Digite o ID do aluno: ");
+			int idAluno = ler.nextInt();
+			
+			System.out.println("\n Digite a quantidade de faltas a serem adicionadas: ");
+			int faltas = ler.nextInt();
+			
+			faltaDAO.adicionarFaltasAAluno(idTurma,idAluno,faltas);
 		}
 }
 		

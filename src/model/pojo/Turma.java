@@ -1,6 +1,10 @@
 package model.pojo;
 
+import java.util.List;
+
 import javax.persistence.*;
+
+import org.jboss.cache.annotations.Compat;
 
 @Entity
 @Table(name="Turma")
@@ -8,7 +12,7 @@ public class Turma {
 	
 	@Id
 	@GeneratedValue
-	private int id;
+	private int idTurma;
 	@Column
 	private String ano;
 	@Column
@@ -19,6 +23,17 @@ public class Turma {
 	private String horario;
 	@Column
 	private int numeroDeVagas;
+	
+	@ManyToMany
+    @JoinTable(name="Falta", joinColumns={@JoinColumn(name="idTurma")},
+    inverseJoinColumns={@JoinColumn(name="idAluno")})
+    private List<Aluno> listaAlunos;
+	
+	 //@ManyToOne(cascade=CascadeType.ALL)
+	 //private Professor professor;
+	 
+	 //@ManyToOne(cascade=CascadeType.ALL)
+	 //private Disciplina disciplina;
 	
 	public Turma(){}
 	public Turma(String ano) {
@@ -53,7 +68,7 @@ public class Turma {
 
 	public void setNumeroDeVagas(int numeroDeVagas) {this.numeroDeVagas = numeroDeVagas; }
 	
-	public int getId(){return this.id;}
+	public int getId(){return this.idTurma;}
 
 	@Override
 	public int hashCode() {
@@ -82,7 +97,7 @@ public class Turma {
 	
 	@Override
 	public String toString() {
-		return "ID: " + this.id + "\t Ano : " + this.ano + "\t Periodo : " + this.periodo + "\t Local : "
+		return "ID: " + this.idTurma + "\t Ano : " + this.ano + "\t Periodo : " + this.periodo + "\t Local : "
 				+ this.local + "\t Horario : " + this.horario + "\t Numero de vagas : "
 				+ this.numeroDeVagas;
 	}
