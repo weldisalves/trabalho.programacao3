@@ -1,6 +1,9 @@
 package model.pojo;
 
+import java.util.List;
+
 import javax.persistence.*;
+
 
 @Entity
 @Table(name = "Professor")
@@ -14,7 +17,14 @@ public class Professor {
 	@Column
 	private String cpf;
 	@Column
-	private String departamento;
+	private String departamento; 
+	
+	@ManyToMany(mappedBy="listaProfessores")
+    private List<Disciplina> listaDisciplinas;
+	
+	//@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+    //@JoinColumn(name="idProfessor")
+    //private List<Turma> listaTurmas;
 	
 	public Professor(){}
 	public Professor(String cpf){
