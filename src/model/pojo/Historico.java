@@ -13,33 +13,25 @@ public class Historico {
 	private int idTurma;
 	@Column
 	private int idDisciplina;
-	public int getIdHistorico() {
-		return idHistorico;
-	}
-	public void setIdHistorico(int idHistorico) {
-		this.idHistorico = idHistorico;
-	}
-	public int getIdDisciplina() {
-		return idDisciplina;
-	}
-	public void setIdDisciplina(int idDisciplina) {
-		this.idDisciplina = idDisciplina;
-	}
-	public void setFaltas(int faltas) {
-		this.faltas = faltas;
-	}
-
 	@Column
 	private int idAluno;
 	@Column
 	private int faltas;
 	@Column
-	private int idNota;
+	private int idLancarNota;
+	
+	public int getIdLancarNota() {
+		return idLancarNota;
+	}
+	public void setIdLancarNota(int idLancarNota) {
+		this.idLancarNota = idLancarNota;
+	}
+
 	@Column
 	private double nota;
 	@Column 
 	private String status;
-	
+		
 	public Historico(){}
 	public Historico(int idAluno, int idTurma){
 		this.idAluno=idAluno;
@@ -79,6 +71,22 @@ public class Historico {
 	}
 	public void setStatus(String status) {
 		this.status = status;
+	}
+	
+	public int getIdHistorico() {
+		return idHistorico;
+	}
+	public void setIdHistorico(int idHistorico) {
+		this.idHistorico = idHistorico;
+	}
+	public int getIdDisciplina() {
+		return idDisciplina;
+	}
+	public void setIdDisciplina(int idDisciplina) {
+		this.idDisciplina = idDisciplina;
+	}
+	public void setFaltas(int faltas) {
+		this.faltas = faltas;
 	}
 	
 	@Override

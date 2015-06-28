@@ -1,3 +1,4 @@
+
 package model.dao;
 
 import java.util.List;
@@ -48,13 +49,12 @@ public class HistoricoDAO implements DAOGenerico<Historico, Integer>{
 	
 	public Historico consultarSituacaoDoAlunoEmDisciplina(int idAluno,
 			int idDisciplina) {
-		
+	
 		EntityManager em = JPAUtil.getInstance().getEntityManager();
         Query query = em.createQuery("select c from Historico c where c.idAluno="+idAluno+"and idDisciplina= "+idDisciplina, Historico.class);
         query.setParameter("idAluno", idAluno);
         query.setParameter("idDisciplina", idDisciplina);
         return (Historico) query.getSingleResult();
-		
 		
 	}
 
