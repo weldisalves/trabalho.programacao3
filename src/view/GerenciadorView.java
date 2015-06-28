@@ -3,8 +3,6 @@ package view;
 import java.util.Scanner;
 
 import model.dao.GerenciadorDAO;
-import model.pojo.DisciplinaTemProfessor;
-import view.TurmaView;
 
 public class GerenciadorView {
 	
@@ -12,7 +10,7 @@ public class GerenciadorView {
 	GerenciadorDAO gerenciadorDAO = new GerenciadorDAO();
 	AlunoView alunoView = new AlunoView();
 	
-	public void adicionarProfessorADisciplina(){
+	public void cadastrarProfessorEmDisciplina(){
 		System.out.println("\n=== Cadastrar professor em disciplina ");
 		System.out.println("\n Digite o ID do professor: ");
 		int idProfessor = ler.nextInt();
@@ -20,7 +18,7 @@ public class GerenciadorView {
 		System.out.println("\n Digite o ID da Disciplina: ");
 		int idDisciplina = ler.nextInt();
 		
-		gerenciadorDAO.adicionarProfessorADisciplina(idProfessor, idDisciplina);
+		gerenciadorDAO.cadastrarProfessorEmDisciplina(idProfessor, idDisciplina);
 		
 	}
 	
@@ -49,4 +47,40 @@ public class GerenciadorView {
 			
 		}while(opcao!=0);
 	}
+	
+	public void cadastrarAlunoEmTurma(){
+		System.out.println("\n=== Cadastrar aluno em turma ");
+		System.out.println("\n Digite o ID do Aluno: ");
+		int idAluno = ler.nextInt();
+		
+		System.out.println("\n Digite o ID da Turma: ");
+		int idTurma = ler.nextInt();
+		
+		gerenciadorDAO.cadastrarAlunoEmTurma(idAluno,idTurma);
+		
+	}
+	
+	public void cadastrarDisciplinaEmTurma(){
+		System.out.println("\n=== Cadastrar disciplina em turma");
+		System.out.println("\n Digite o ID da disciplina: ");
+		int idDisciplina = ler.nextInt();
+		
+		System.out.println("\n Digite o ID da Turma: ");
+		int idTurma = ler.nextInt();
+		
+		gerenciadorDAO.cadastrarDisciplinaEmTurma(idDisciplina,idTurma);
+	}
+
+	public void cadastrarProfessorEmTurma() {
+		System.out.println("\n=== Cadastrar professor em turma");
+		System.out.println("\n Digite o ID do Professor: ");
+		int idProfessor = ler.nextInt();
+		
+		System.out.println("\n Digite o ID da Turma: ");
+		int idTurma = ler.nextInt();
+		
+		gerenciadorDAO.cadastrarProfessorEmTurma(idProfessor,idTurma);
+		
+	}
+	
 }
