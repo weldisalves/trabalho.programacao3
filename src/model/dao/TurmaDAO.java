@@ -71,15 +71,6 @@ public class TurmaDAO implements DAOGenerico<Turma, Integer> {
 		
 	}
 
-	public void alterarProfessor(int idTurma, int idProfessor) {
-		EntityManager em = JPAUtil.getInstance().getEntityManager();       
-		em.getTransaction().begin();
-        Turma objeto = em.find(Turma.class, idTurma);
-        objeto.setIdProfessor(idProfessor);
-        em.getTransaction().commit();
-        em.close();
-		
-	}
 	
 	public List<Turma> buscarPorDisciplina(int idDisciplina){
 		EntityManager em = JPAUtil.getInstance().getEntityManager();

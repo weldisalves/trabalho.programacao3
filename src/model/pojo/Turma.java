@@ -4,8 +4,6 @@ import java.util.List;
 
 import javax.persistence.*;
 
-import org.jboss.cache.annotations.Compat;
-
 @Entity
 @Table(name="Turma")
 public class Turma {
@@ -30,9 +28,6 @@ public class Turma {
     private List<Aluno> listaAlunos;
 	@Column
 	private int idDisciplina;
-	@Column
-	private int idProfessor;
-	 
 	
 	public Turma(){}
 	public Turma(String ano) {
@@ -45,7 +40,6 @@ public class Turma {
 		this.horario=horario;
 		this.numeroDeVagas=numerodevagas;
 		this.idDisciplina=0;
-		this.idProfessor=0;
 		this.idTurma=0;
 	}
 	
@@ -91,9 +85,6 @@ public class Turma {
 	}
 	public void setIdDisciplina(int idDisciplina) {
 		this.idDisciplina = idDisciplina;
-	}
-	public void setIdProfessor(int idProfessor) {
-		this.idProfessor=idProfessor;		
 	}
 
 }
