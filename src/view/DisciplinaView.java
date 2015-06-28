@@ -3,13 +3,19 @@ package view;
 import java.util.Scanner;
 
 import model.dao.DisciplinaDAO;
+import model.dao.DisciplinaTemProfessorDAO;
+import model.dao.HistoricoDAO;
 import model.pojo.Disciplina;
+import model.pojo.DisciplinaTemProfessor;
+import model.pojo.Historico;
 
 public class DisciplinaView {
 		private static Scanner ler = new Scanner(System.in);
 		private static Scanner sc = new Scanner(System.in); 
 		private static Disciplina objeto;
-		private DisciplinaDAO disciplinas = new DisciplinaDAO();
+		private DisciplinaDAO disciplinaDAO = new DisciplinaDAO();
+		private HistoricoDAO historicoDAO = new HistoricoDAO();
+		private DisciplinaTemProfessorDAO disciplinaTemProfessorDAO = new DisciplinaTemProfessorDAO();
 		
         //Cadastrar
 		public void cadastrar(){
@@ -21,7 +27,7 @@ public class DisciplinaView {
 			System.out.println("Carga horaria: ");
 			int cargahoraria = sc.nextInt();
 			objeto = new Disciplina(nome,ementa,cargahoraria);
-			this.disciplinas.salvar(objeto);
+			this.disciplinaDAO.salvar(objeto);
 					
 		}
 				
@@ -29,7 +35,7 @@ public class DisciplinaView {
 		
 		public void listarDisciplina(){
 			System.out.println("=== DISCILINAS: ");
-			for(Disciplina disciplina : this.disciplinas.listar()){
+			for(Disciplina disciplina : this.disciplinaDAO.listar()){
 				System.out.println(disciplina);
 			}
 		}
@@ -41,20 +47,19 @@ public class DisciplinaView {
 			String nome = ler.nextLine();
 			objeto = new Disciplina(nome);
 			
-			for(Disciplina disciplina : this.disciplinas.buscarPorNome(nome)){
+			Disciplina disciplina = this.disciplinaDAO.buscarPorNome(nome);
 				System.out.println(disciplina);
-			}	
 		}
 		
 		public void removerDisciplina(){
 			System.out.println("\n=== REMOVER DISCIPLINA");
 			System.out.println("\nEntre com o nome:");	
 			String nome = ler.nextLine();
-							
-			if(this.disciplinas.buscarPorNome(nome)!= null){
-				objeto = new Disciplina(nome);
-				objeto = this.disciplinas.buscarPorNome(nome).get(this.disciplinas.buscarPorNome(nome).indexOf(objeto));
-				this.disciplinas.remover(objeto);
+			
+			objeto = this.disciplinaDAO.buscarPorNome(nome);		
+			if(objeto!= null){
+				
+				this.disciplinaDAO.remover(objeto);
 				System.out.println("\n===Disciplina removido ====");
 				return;
 			}
@@ -68,7 +73,39 @@ public class DisciplinaView {
 			System.out.println("\n Entre com o ID da Disciplina: ");
 			int id = ler.nextInt();
 			
-			System.out.println(disciplinas.buscarPorId(id));
+			System.out.println(disciplinaDAO.buscarPorId(id));
 			
+		}
+
+		public void consultarSituacaoDoAlunoEmDisciplina() {
+			System.out.println("\n=== Consultar situação do aluno em Disciplina");
+			System.out.println("Digite o ID do Aluno: ");
+			int idAluno = ler.nextInt();
+			System.out.println("Digite o ID da disciplina: ");
+			int idDisciplina = ler.nextInt();
+			
+			Historico historico = historicoDAO.consultarSituacaoDoAlunoEmDisciplina(idAluno,idDisciplina);
+			System.out.println(historico);
+			
+		}
+
+		public void consultarNumeroDeTurmasOfertadasPorUmaDisciplina() {
+			System.out.println("\n=== Consultar numero de turmas ofertadas por uma disciplina");
+			System.out.println("Digite o ID da Disciplina: ");
+			int idDisciplina = ler.nextInt();
+			
+			int quantidade = disciplinaDAO.consultarNumeroDeTurmasOfertadasPorUmaDisciplina(idDisciplina);
+			
+			System.out.println(quantidade);
+			
+		}
+
+		public void consultarNumeroDeDisciplinasLecionadasPorUmProfessor() {
+			System.out.println("\n== Consultar numero de disciplinas lecionadas por um professor");
+			System.out.println("Digite o ID do Professor: ");
+			int idProfessor = ler.nextInt();
+			
+			int quantidade = disciplinaTemProfessorDAO.consultarNumeroDeDisciplinaslecionadasPorUmProfessor(idProfessor);
+			System.out.println(quantidade);
 		}
 	}

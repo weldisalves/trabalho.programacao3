@@ -1,17 +1,18 @@
 package model.dao;
 
-import model.pojo.Disciplina;
+
+import model.pojo.*;
 import util.JPAUtil;
 
 import java.util.List;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Query;
+import javax.persistence.*;
 
 
 public class DisciplinaDAO implements DAOGenerico<Disciplina, Integer> {
-
+	
+	Turma turma;
+	TurmaDAO turmaDAO = new TurmaDAO();
 	
 	@Override
     public void salvar(Disciplina objeto) {
@@ -43,12 +44,11 @@ public class DisciplinaDAO implements DAOGenerico<Disciplina, Integer> {
         return lista;
     }
 
-    public List<Disciplina> buscarPorNome(String nome) {
+    public Disciplina buscarPorNome(String nome) {
         EntityManager em = JPAUtil.getInstance().getEntityManager();
         Query query = em.createQuery("select c from Disciplina c where c.nome like :nome", Disciplina.class);
         query.setParameter("nome", nome);
-        return query.getResultList();
-        
+        return (Disciplina) query.getSingleResult();
     }
 
 	@Override
@@ -57,4 +57,21 @@ public class DisciplinaDAO implements DAOGenerico<Disciplina, Integer> {
         return em.find(Disciplina.class, id);
     }
 
+	public void alterarNumeroDeTurmasOfertadas(int idDisciplina, int i) {
+		EntityManager em = JPAUtil.getInstance().getEntityManager();       
+		em.getTransaction().begin();
+        Disciplina objeto = em.find(Disciplina.class, idDisciplina);
+        objeto.setAdicionarDisciplinaOfertada(i);
+        em.getTransaction().commit();
+        em.close();
+		
+	}
+
+	public int consultarNumeroDeTurmasOfertadasPorUmaDisciplina(int idDisciplina) {
+		return buscarPorId(idDisciplina).getNumeroDeTurmasOfertadas();
+	}
+
+	
+
+	
 }

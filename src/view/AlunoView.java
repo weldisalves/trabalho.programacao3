@@ -71,9 +71,9 @@ public class AlunoView {
 			System.out.println("=== BUSCA POR NOME: ");
 			System.out.println("\n Digite um nome: ");
 			String nome = ler.nextLine();
-			for(Aluno aluno : alunos.buscarPorNome(nome)){
+			Aluno aluno = alunos.buscarPorNome(nome);
 				System.out.println(aluno);
-			}
+			
 		}
 	
 	public void alterarNome(){

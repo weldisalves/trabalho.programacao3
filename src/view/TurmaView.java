@@ -4,8 +4,8 @@ import java.io.IOException;
 import java.util.Scanner;
 
 import model.dao.AlunoDAO;
-import model.dao.FaltaDAO;
 import model.dao.TurmaDAO;
+import model.pojo.Historico;
 import model.pojo.Turma;
 
 public class TurmaView {
@@ -13,11 +13,10 @@ public class TurmaView {
 		private static Scanner ler = new Scanner(System.in);
 		private static Scanner sc = new Scanner(System.in); 
 		private static Turma objeto;
-		private TurmaDAO turmas = new TurmaDAO();
-		private FaltaDAO faltaDAO = new FaltaDAO();
+		private TurmaDAO turmaDAO = new TurmaDAO();
 		
 		public TurmaView() throws IOException{
-			this.turmas = new TurmaDAO();
+			this.turmaDAO = new TurmaDAO();
 		}
 		
 
@@ -36,14 +35,14 @@ public class TurmaView {
 			int numerodevagas = sc.nextInt();
 			
 			objeto = new Turma(ano,periodo,local,horario,numerodevagas);
-			this.turmas.salvar(objeto);		
+			this.turmaDAO.salvar(objeto);		
 					
 		}
 		
 		//lista
 		
 		public void listarTurma(){
-			for(Turma turma : this.turmas.listar()){
+			for(Turma turma : this.turmaDAO.listar()){
 				System.out.println(turma);
 			}
 		}
@@ -54,7 +53,7 @@ public class TurmaView {
 			System.out.println("\n Digite o ano:");
 			String ano = ler.nextLine();
 			
-			for(Turma turma: this.turmas.buscarPorAno(ano)){
+			for(Turma turma: this.turmaDAO.buscarPorAno(ano)){
 				System.out.println(turma);
 			}			
 		}
@@ -64,8 +63,8 @@ public class TurmaView {
 			System.out.println("\n Digite o ID da Turma: ");
 			int id = ler.nextInt();
 							
-			if(this.turmas.buscarPorId(id)!= null){
-				this.turmas.remover(this.turmas.buscarPorId(id));
+			if(this.turmaDAO.buscarPorId(id)!= null){
+				this.turmaDAO.remover(this.turmaDAO.buscarPorId(id));
 				System.out.println("\n==== Aluno removido ====");
 				return;
 			}
@@ -79,21 +78,21 @@ public class TurmaView {
 			System.out.println("\n Entre com o ID da Turma: ");
 			int id = ler.nextInt();
 			
-			System.out.println(turmas.buscarPorId(id));
+			System.out.println(turmaDAO.buscarPorId(id));
 			
 		}
 		
 		public void consultarTurma(){
 			System.out.println("\n PESQUISAR TURMA");
 			System.out.println("\n Digite a disciplina: ");
-			String disciplina = ler.nextLine();
+			String disciplina = ler.next();
 			System.out.println("\n Digite o ano: ");
-			String ano = ler.nextLine();
+			String ano = ler.next();
 			System.out.println("\n Digite  o periodo: ");
 			int periodo = ler.nextInt();
 			
-			for(Turma turma: this.turmas.buscarPorAno(ano)){
-				System.out.println(turma);
+			for(Historico historico: this.turmaDAO.consultarTurma(ano,periodo,disciplina)){
+				System.out.println(historico);
 			}			
 		}
 		
@@ -108,7 +107,7 @@ public class TurmaView {
 			System.out.println("\n Digite a quantidade de faltas a serem adicionadas: ");
 			int faltas = ler.nextInt();
 			
-			faltaDAO.adicionarFaltasAAluno(idTurma,idAluno,faltas);
+			//faltaDAO.adicionarFaltasAAluno(idTurma,idAluno,faltas);
 		}
 }
 		

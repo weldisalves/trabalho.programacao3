@@ -42,11 +42,11 @@ public class AlunoDAO implements DAOGenerico<Aluno, Integer> {
         return lista;
     }
 
-    public List<Aluno> buscarPorNome(String nome) {
+    public Aluno buscarPorNome(String nome) {
         EntityManager em = JPAUtil.getInstance().getEntityManager();
         Query query = em.createQuery("select c from Aluno c where c.nome like :nome", Aluno.class);
         query.setParameter("nome", nome);
-        return query.getResultList();
+        return (Aluno) query.getSingleResult();
         
     }
 

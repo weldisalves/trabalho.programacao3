@@ -25,15 +25,14 @@ public class Turma {
 	private int numeroDeVagas;
 	
 	@ManyToMany
-    @JoinTable(name="Falta", joinColumns={@JoinColumn(name="idTurma")},
+    @JoinTable(name="Historico", joinColumns={@JoinColumn(name="idTurma")},
     inverseJoinColumns={@JoinColumn(name="idAluno")})
     private List<Aluno> listaAlunos;
-	
-	 //@ManyToOne(cascade=CascadeType.ALL)
-	 //private Professor professor;
+	@Column
+	private int idDisciplina;
+	@Column
+	private int idProfessor;
 	 
-	 //@ManyToOne(cascade=CascadeType.ALL)
-	 //private Disciplina disciplina;
 	
 	public Turma(){}
 	public Turma(String ano) {
@@ -45,6 +44,9 @@ public class Turma {
 		this.local=local;
 		this.horario=horario;
 		this.numeroDeVagas=numerodevagas;
+		this.idDisciplina=0;
+		this.idProfessor=0;
+		this.idTurma=0;
 	}
 	
 
@@ -77,29 +79,21 @@ public class Turma {
 		result = prime * result + ((ano == null) ? 0 : ano.hashCode());
 		return result;
 	}
-
-	/*@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Turma other = (Turma) obj;
-		if (ano == null) {
-			if (other.ano != null || other.periodo != 0 || other.disciplina!=null)
-				return false;
-		} else if (!ano.equals(other.ano)||periodo != other.periodo||!disciplina.equals(other.disciplina))
-			return false;
-		return true;
-	}*/
 	
 	@Override
 	public String toString() {
 		return "ID: " + this.idTurma + "\t Ano : " + this.ano + "\t Periodo : " + this.periodo + "\t Local : "
 				+ this.local + "\t Horario : " + this.horario + "\t Numero de vagas : "
 				+ this.numeroDeVagas;
+	}
+	public int getIdDisciplina() {
+		return idDisciplina;
+	}
+	public void setIdDisciplina(int idDisciplina) {
+		this.idDisciplina = idDisciplina;
+	}
+	public void setIdProfessor(int idProfessor) {
+		this.idProfessor=idProfessor;		
 	}
 
 }

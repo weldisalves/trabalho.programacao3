@@ -20,14 +20,16 @@ public class Disciplina {
 	@Column
 	private int numeroDeTurmasOfertadas;
 	
+	public int getNumeroDeTurmasOfertadas() {
+		return numeroDeTurmasOfertadas;
+	}
+	public void setNumeroDeTurmasOfertadas(int numeroDeTurmasOfertadas) {
+		this.numeroDeTurmasOfertadas = numeroDeTurmasOfertadas;
+	}
 	@ManyToMany
     @JoinTable(name="DisciplinaTemProfessor", joinColumns={@JoinColumn(name="idDisciplina")}, 
     inverseJoinColumns={@JoinColumn(name="idProfessor")})
     private List<Professor> listaProfessores;
-	
-	//@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-   // @JoinColumn(name="idDisciplina")
-   // private List<Turma> listaTurmas;
 	
 	public Disciplina(){}
 	public Disciplina(String nome){
@@ -69,27 +71,15 @@ public class Disciplina {
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		return result;
 	}
-		@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Disciplina other = (Disciplina) obj;
-		if (nome == null) {
-			if (other.nome != null)
-				return false;
-		} else if (!nome.equals(other.nome))
-			return false;
-		return true;
-	}
 	
 	@Override
 	public String toString() {
 		return "ID: "+ this.idDisciplina + "\t Nome : " + nome + ", Ementa : " + ementa
 				+ ", Carga Hor�ria : " + cargaHoraria ;
+	}
+	public void setAdicionarDisciplinaOfertada(int i) {
+		this.numeroDeTurmasOfertadas+=i;
+		
 	}
 	
 }

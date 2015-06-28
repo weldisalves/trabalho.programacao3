@@ -23,9 +23,8 @@ import java.util.Scanner;
 	        System.out.println("2-Listar alunos");
 	        System.out.println("3-Pesquisar aluno");
 	        System.out.println("4-remover aluno");
-	        System.out.println("5-cadastrar em uma turma");
-	        System.out.println("6-buscar por ID");
-	        System.out.println("7-buscar por nome");
+	        System.out.println("5-buscar por ID");
+	        System.out.println("6-buscar por nome");
 	        System.out.println("0-Voltar ao menu principal");
 	        System.out.println("\nDigite o numero correspondente a opcao:");
 		}
@@ -49,6 +48,9 @@ import java.util.Scanner;
 		        System.out.println("3-Pesquisar disciplina");
 		        System.out.println("4-remover disciplina");
 		        System.out.println("5-Pesquisar por ID");
+		        System.out.println("6-COnsultar situacao do aluno");
+		        System.out.println("7-Consultar numero de turmas ofertadas por uma disciplina");
+		        System.out.println("8-Consultar numero de disciplinas lecionadas por um professor");
 		        System.out.println("0- Voltar ao menu principal");
 		        System.out.println("\nDigite o numero correspondente a opcao:");
 		}
@@ -57,7 +59,7 @@ import java.util.Scanner;
 	    	 	System.out.println("=== OPÇÕES:");
 		        System.out.println("1-Cadastrar turma");
 		        System.out.println("2-Listar turma");
-		        System.out.println("3-Pesquisar turma");
+		        System.out.println("3-Consultar turma");
 		        System.out.println("4-remover turma");
 		        System.out.println("5-Buscar por ID");
 		        System.out.println("0- Voltar ao menu principal");
@@ -79,8 +81,11 @@ import java.util.Scanner;
 			Scanner ler = new Scanner(System.in);
 			
 			System.out.println("=== OPÇÕES");
-			System.out.println("1-Cadastrar Professor em Disciplina"); 
-			System.out.println("2-Alterar Aluno");
+			System.out.println("1-Alterar Aluno"); 
+			System.out.println("2-Cadastrar Professor em Disciplina");
+			System.out.println("3-Cadastrar Disciplina em Turma");
+			System.out.println("4-Cadastrar Aluno em Turma");
+			System.out.println("5-Cadastrar Professor em Turma");
 			System.out.println("0-Sair");
 			System.out.println("\n Digite a opção: ");
 			
@@ -88,47 +93,7 @@ import java.util.Scanner;
 			return opcao;
 			
 		}
-		/*
-		public static void cadastrarAlunoEmUmaTurma(AlunoDAO alunos, TurmaDAO turmas,DisciplinaDAO disciplinas){
-			System.out.println("\n Cadastrar Aluno em uma turma\n");
-			System.out.println("\n Digite o cpf do aluno: ");
-			local = new Scanner(System.in);
-			String cpf = local.nextLine();
-			Aluno newAluno = new Aluno(cpf);
-			
-			if(alunos.listar().contains(newAluno)) newAluno = alunos.buscar(newAluno);
-			
-			else{ System.out.println("\n Aluno não existe");
-			return;
-				}
-			
-				System.out.println("\n Digite o ano da turma: ");
-				String ano = local.nextLine();
-				
-				System.out.println("\n Digite o periodo: ");
-				int periodo = local.nextInt();
-				
-				System.out.println("\n Digite o nome da disciplina: ");
-				String disciplina = local.nextLine();
-				
-				Disciplina newDisciplina = new Disciplina(disciplina);
-				
-				Turma newTurma = new Turma(ano,periodo,disciplina);
-				
-				if(turmas.listar().contains(newTurma) && disciplinas.listar().contains(newDisciplina)){
-					
-					int index = turmas.listar().indexOf(newTurma);
-					
-					turmas.listar().get(index).getAlunos().add(newAluno);
-					index = alunos.listar().indexOf(newAluno);
-					alunos.listar().get(index).getTurmas().add(newTurma);
-				}
-				
-				
-				
-				
-			}*/
-							  
+									  
 			public static void main(String[] args) throws IOException {	    
 			
 				AlunoView alunoView = new AlunoView();
@@ -211,11 +176,9 @@ import java.util.Scanner;
 					        		}
 				        							        		
 					        	}
-					        /*if(opcao2==5){
-					        //	cadastrarAlunoEmUmaTurma(alunos,turmas,disciplinas);
-					        }*/
-					        else if(opcao2 == 6){ alunoView.buscarPorId();}
-					        else if(opcao2 == 7){ alunoView.buscarPorNome();}
+					     
+					        else if(opcao2 == 5){ alunoView.buscarPorId();}
+					        else if(opcao2 == 6){ alunoView.buscarPorNome();}
 					        
 					        if(opcao2==0){
 					        	Menu();
@@ -345,6 +308,9 @@ import java.util.Scanner;
 					        }
 					   
 					        if(opcao2 == 5){ disciplinaView.buscarPorId(); }
+					        if(opcao2 == 6){ disciplinaView.consultarSituacaoDoAlunoEmDisciplina(); }
+					        if(opcao2 == 7){ disciplinaView.consultarNumeroDeTurmasOfertadasPorUmaDisciplina(); }
+					        if(opcao2 == 8){ disciplinaView.consultarNumeroDeDisciplinasLecionadasPorUmProfessor(); }
 					        if(opcao2==0){
 					        	Menu();
 					        }
@@ -359,7 +325,7 @@ import java.util.Scanner;
 					        	turmaView.listarTurma();
 					        }
 					        if(opcao2==3){
-					        	turmaView.pesquisarTurma();
+					        	turmaView.consultarTurma();
 					        }
 					        if(opcao2==4){
 					        	turmaView.removerTurma();
@@ -398,11 +364,22 @@ import java.util.Scanner;
 			            		
 			            		switch(opcao4){
 			            		case 1:
-			            			gerenciadorView.adicionarProfessorADisciplina();
+			            			gerenciadorView.alterarAluno();
 			            			break;
 			            		
+			           
+			            		
 			            		case 2:
-			            			gerenciadorView.alterarAluno();
+			            			gerenciadorView.cadastrarProfessorEmDisciplina();
+			            			break;
+			            		case 3:
+			            			gerenciadorView.cadastrarDisciplinaEmTurma();
+			            			break;
+			            		case 4:
+			            			gerenciadorView.cadastrarAlunoEmTurma();
+			            			break;
+			            			
+			            		case 5: gerenciadorView.cadastrarProfessorEmTurma();
 			            			break;
 			            		}
 			            	}while(opcao4 != 0);
