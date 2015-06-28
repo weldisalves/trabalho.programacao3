@@ -2,6 +2,8 @@ package view;
 
 import java.util.Scanner;
 
+import org.hibernate.QueryParameterException;
+
 import model.dao.DisciplinaDAO;
 import model.dao.DisciplinaTemProfessorDAO;
 import model.dao.HistoricoDAO;
@@ -77,7 +79,8 @@ public class DisciplinaView {
 			
 		}
 
-		public void consultarSituacaoDoAlunoEmDisciplina() {
+		public void consultarSituacaoDoAlunoEmDisciplina() throws IllegalArgumentException{
+			try{
 			System.out.println("\n=== Consultar situação do aluno em Disciplina");
 			System.out.println("Digite o ID do Aluno: ");
 			int idAluno = ler.nextInt();
@@ -86,6 +89,9 @@ public class DisciplinaView {
 			
 			Historico historico = historicoDAO.consultarSituacaoDoAlunoEmDisciplina(idAluno,idDisciplina);
 			System.out.println(historico);
+			}catch(IllegalArgumentException e){
+				System.out.println("Disciplina ou aluno inválido!!!");
+			}
 			
 		}
 
