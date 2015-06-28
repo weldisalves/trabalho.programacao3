@@ -1,5 +1,6 @@
 package model.dao;
 
+import model.pojo.Aluno;
 import model.pojo.Professor;
 import util.JPAUtil;
 
@@ -24,8 +25,8 @@ public class ProfessorDAO implements DAOGenerico<Professor, Integer> {
 
 	@Override
     public void remover(Professor objeto) {
-        EntityManager em = JPAUtil.getInstance().getEntityManager();       
-          
+		EntityManager em = JPAUtil.getInstance().getEntityManager();       
+        
         objeto = em.find(Professor.class, objeto.getId());
 
         em.getTransaction().begin();
@@ -51,11 +52,11 @@ public class ProfessorDAO implements DAOGenerico<Professor, Integer> {
         
     }
 
-    public List<Professor> buscarPorCpf(String cpf) {
+    public Professor buscarPorCpf(String cpf) {
         EntityManager em = JPAUtil.getInstance().getEntityManager();
         Query query = em.createQuery("select c from Professor c where c.cpf like :cpf", Professor.class);
         query.setParameter("cpf", cpf);
-        return query.getResultList();
+        return (Professor) query.getSingleResult();
     }
 
 	@Override

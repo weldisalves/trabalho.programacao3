@@ -22,9 +22,6 @@ public class Professor {
 	@ManyToMany(mappedBy="listaProfessores")
     private List<Disciplina> listaDisciplinas;
 	
-	//@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-    //@JoinColumn(name="idProfessor")
-    //private List<Turma> listaTurmas;
 	
 	public Professor(){}
 	public Professor(String cpf){

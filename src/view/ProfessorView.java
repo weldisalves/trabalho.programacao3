@@ -3,6 +3,7 @@ package view;
 import java.util.Scanner;
 
 import model.dao.ProfessorDAO;
+import model.pojo.Aluno;
 import model.pojo.Professor;
 
 
@@ -39,21 +40,21 @@ public class ProfessorView {
 		System.out.println("\n Digite o cpf:");
 		String cpf = ler.nextLine();
 		
-		for(Professor professor : professores.buscarPorCpf(cpf)){
+		Professor professor = professores.buscarPorCpf(cpf);
 			System.out.println(professor);
-		}
+		
 	}
 	
 	public void removerProfessor(){
 		System.out.println("\n=== REMOVER PROFESSOR");
-		System.out.println("\nEntre com o CPF do professor:");	
+		System.out.println("\nEntre com o CPF do Professor:");	
 		String cpf = ler.nextLine();
 						
 		if(this.professores.buscarPorCpf(cpf)!= null){
 			objeto = new Professor(cpf);
-			objeto = this.professores.buscarPorCpf(cpf).get(this.professores.buscarPorCpf(cpf).indexOf(objeto));
+			objeto = this.professores.buscarPorCpf(cpf);
 			this.professores.remover(objeto);
-			System.out.println("\n==== professor removido ====");
+			System.out.println("\n==== Professor removido ====");
 			return;
 		}
 		
