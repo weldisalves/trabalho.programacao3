@@ -37,9 +37,8 @@ public class AlunoDAO implements DAOGenerico<Aluno, Integer> {
     public List<Aluno> listar() {
         EntityManager em = JPAUtil.getInstance().getEntityManager();
         Query query = em.createQuery("select c from Aluno c", Aluno.class);
-        List lista = query.getResultList();
-        em.close();
-        return lista;
+        return query.getResultList();
+
     }
 
     public Aluno buscarPorNome(String nome) {
@@ -50,12 +49,12 @@ public class AlunoDAO implements DAOGenerico<Aluno, Integer> {
         
     }
 
-    public List<Aluno> buscarPorCpf(String cpf) {
+    public Aluno buscarPorCpf(String cpf) {
         EntityManager em = JPAUtil.getInstance().getEntityManager();
         Query query = em.createQuery("select c from Aluno c where c.cpf like :cpf",
                 Aluno.class);
         query.setParameter("cpf", cpf);
-        return query.getResultList();
+        return (Aluno) query.getSingleResult();
     }
 
 	@Override

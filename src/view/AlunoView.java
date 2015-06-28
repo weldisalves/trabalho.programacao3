@@ -36,9 +36,9 @@ public class AlunoView {
 		System.out.println("\n Digite o cpf:");
 		String cpf = ler.nextLine();
 		
-		for(Aluno aluno : alunos.buscarPorCpf(cpf)){
+		Aluno aluno = alunos.buscarPorCpf(cpf);
 			System.out.println(aluno);
-		}
+		
 	}
 	
 	public void removerAluno(){
@@ -48,7 +48,7 @@ public class AlunoView {
 						
 		if(this.alunos.buscarPorCpf(cpf)!= null){
 			objeto = new Aluno(cpf);
-			objeto = this.alunos.buscarPorCpf(cpf).get(this.alunos.buscarPorCpf(cpf).indexOf(objeto));
+			objeto = this.alunos.buscarPorCpf(cpf);
 			this.alunos.remover(objeto);
 			System.out.println("\n==== Aluno removido ====");
 			return;
