@@ -5,31 +5,39 @@ import javax.persistence.*;
 import model.pojo.Aluno;
 import model.pojo.Disciplina;
 import model.pojo.DisciplinaTemProfessor;
+import model.pojo.DisciplinaTemTurma;
 import model.pojo.Historico;
 import model.pojo.Professor;
+import model.pojo.ProfessorTemTurma;
 import model.pojo.Turma;
 import util.JPAUtil;
 
 
 public class GerenciadorDAO {
 	
-	Professor professor;
-	ProfessorDAO professorDAO = new ProfessorDAO();
+	private Professor professor;
+	private ProfessorDAO professorDAO = new ProfessorDAO();
 	
-	Disciplina disciplina;
-	DisciplinaDAO disciplinaDAO = new DisciplinaDAO();
+	private Disciplina disciplina;
+	private DisciplinaDAO disciplinaDAO = new DisciplinaDAO();
 	
-	Aluno aluno;
-	AlunoDAO alunoDAO = new AlunoDAO();
+	private Aluno aluno;
+	private AlunoDAO alunoDAO = new AlunoDAO();
 	
-	Turma turma;
-	TurmaDAO turmaDAO = new TurmaDAO();
+	private Turma turma;
+	private TurmaDAO turmaDAO = new TurmaDAO();
 	
-	DisciplinaTemProfessor disciplinaTemProfessor;
-	DisciplinaTemProfessorDAO disciplinaTemProfessorDAO = new DisciplinaTemProfessorDAO();
+	private DisciplinaTemProfessor disciplinaTemProfessor;
+	private DisciplinaTemProfessorDAO disciplinaTemProfessorDAO = new DisciplinaTemProfessorDAO();
 	
-	Historico historico;
-	HistoricoDAO historicoDAO = new HistoricoDAO();
+	private Historico historico;
+	private HistoricoDAO historicoDAO = new HistoricoDAO();
+	
+	private ProfessorTemTurma professorTemTurma;
+	private ProfessorTemTurmaDAO professorTemTurmaDAO = new ProfessorTemTurmaDAO();
+	
+	private DisciplinaTemTurma disciplinaTemTurma;
+	private DisciplinaTemTurmaDAO disciplinaTemTurmaDAO = new DisciplinaTemTurmaDAO();
 
 	
 	public void cadastrarProfessorEmDisciplina(int idProfessor,int idDisciplina){
@@ -60,7 +68,8 @@ public class GerenciadorDAO {
         turma = turmaDAO.buscarPorId(idTurma);
         
         if(disciplina != null && turma != null){
-        	turmaDAO.alterarDisciplina(idTurma, idDisciplina);
+        	disciplinaTemTurma = new DisciplinaTemTurma(idDisciplina,idTurma);
+        	disciplinaTemTurmaDAO.salvar(disciplinaTemTurma);
         	disciplinaDAO.alterarNumeroDeTurmasOfertadas(idDisciplina,1);     	
         }
 	}
@@ -70,7 +79,8 @@ public class GerenciadorDAO {
         turma = turmaDAO.buscarPorId(idTurma);
         
         if(professor != null && turma != null){
-        	turmaDAO.alterarProfessor(idTurma, idProfessor);
+        	professorTemTurma = new ProfessorTemTurma(idProfessor,idTurma);
+        	professorTemTurmaDAO.salvar(professorTemTurma);
         }
 	}
 
