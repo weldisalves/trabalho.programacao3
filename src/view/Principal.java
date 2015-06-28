@@ -62,6 +62,8 @@ import java.util.Scanner;
 		        System.out.println("3-Consultar turma");
 		        System.out.println("4-remover turma");
 		        System.out.println("5-Buscar por ID");
+		        System.out.println("6-Cadastrar atividade");
+		        System.out.println("7-Lancar notas");
 		        System.out.println("0- Voltar ao menu principal");
 		        System.out.println("\nDigite o numero correspondente a opcao:");
 		 }
@@ -173,12 +175,11 @@ import java.util.Scanner;
 					        					Menu();
 					        				}
 					        			}
-					        		}
-				        							        		
+					        		}					        		
 					        	}
 					     
-					        else if(opcao2 == 5){ alunoView.buscarPorId();}
-					        else if(opcao2 == 6){ alunoView.buscarPorNome();}
+					        else if(opcao2 == 5){ alunoView.buscarPorId(); }
+					        else if(opcao2 == 6){ alunoView.buscarPorNome(); }
 					        
 					        if(opcao2==0){
 					        	Menu();
@@ -209,15 +210,10 @@ import java.util.Scanner;
 					        					Menu();
 					        				}
 					        			}
-					        		}
-				        			
+					        		}			
 					        }
-					        if(opcao2==2){
-					        	professorView.listarProfessor();
-					        }
-					        if(opcao2==3){
-					        	professorView.pesquisarProfessor();
-					        }
+					        if(opcao2==2){ professorView.listarProfessor(); }
+					        if(opcao2==3){ professorView.pesquisarProfessor(); }
 					        if(opcao2==4){				    	
 					        	int opcao3;
 					        	professorView.removerProfessor();
@@ -276,12 +272,8 @@ import java.util.Scanner;
 					        			}
 					        		}
 					        }
-					        if(opcao2==2){
-					        	disciplinaView.listarDisciplina();
-					        }
-					        if(opcao2==3){
-					        	disciplinaView.pesquisarDisciplina();
-					        }
+					        if(opcao2==2){ disciplinaView.listarDisciplina(); }
+					        if(opcao2==3){ disciplinaView.pesquisarDisciplina(); }
 					        if(opcao2==4){
 					        	int opcao3;
 					        	disciplinaView.removerDisciplina();
@@ -318,19 +310,13 @@ import java.util.Scanner;
 			            case 4:
 			            	CadastroTurma();
 			            	opcao2 = entrada.nextInt();
-					        if(opcao2==1){				        
-					        	turmaView.cadastrar();				        	
-					        }
-					        if(opcao2==2){
-					        	turmaView.listarTurma();
-					        }
-					        if(opcao2==3){
-					        	turmaView.consultarTurma();
-					        }
-					        if(opcao2==4){
-					        	turmaView.removerTurma();
-					        }
-					        if(opcao2 == 5){ turmaView.buscarPorId(); }
+					        if(opcao2==1){ turmaView.cadastrar(); }
+					        if(opcao2==2){ turmaView.listarTurma(); }
+					        if(opcao2==3){ turmaView.consultarTurma(); }
+					        if(opcao2==4){ turmaView.removerTurma(); }
+					        if(opcao2==5){ turmaView.buscarPorId(); }
+					        if(opcao2==6){ turmaView.cadastrarAtividadeEmTurma(); }
+					        if(opcao2==7){ turmaView.lancarNotas(); }
 					       
 					        if(opcao2==0){
 					        	Menu();
@@ -339,18 +325,10 @@ import java.util.Scanner;
 			            case 5:
 			            	CadastrarAtividade();
 			            	opcao2 = entrada.nextInt();
-					        if(opcao2==1){
-					        	atividadeView.cadastrar();				   
-					        }
-					        if(opcao2==2){
-					        	atividadeView.listarAtividade();
-					        }
-					        if(opcao2==3){
-					        	atividadeView.pesquisarAtividade();
-					        }
-					        if(opcao2==4){
-					        	atividadeView.removerAtividade();
-					        }
+					        if(opcao2==1){ atividadeView.cadastrar(); }
+					        if(opcao2==2){ atividadeView.listarAtividade(); }
+					        if(opcao2==3){ atividadeView.pesquisarAtividade(); }
+					        if(opcao2==4){ atividadeView.removerAtividade(); }
 					        if(opcao2==5){ atividadeView.buscarPorId(); }
 					        if(opcao2==0){
 					        	Menu();
